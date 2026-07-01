@@ -1,0 +1,128 @@
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  /* Backgrounds — deep purple-black, VoidZero-style */
+  --bg:          #08060D;
+  --bg-activity: #0a0812;
+  --bg-sidebar:  #0d0b14;
+  --bg-tabs:     #0a0812;
+  --bg-editor:   #08060D;
+  --bg-hover:    rgba(255,255,255,0.04);
+  --bg-active:   rgba(255,255,255,0.07);
+  --bg-card:     rgba(255,255,255,0.03);
+
+  /* Borders */
+  --border:       rgba(255,255,255,0.08);
+  --border-mid:   rgba(255,255,255,0.12);
+  --border-glow:  rgba(189, 52, 254, 0.35);
+
+  /* Foreground */
+  --fg:       #f0eeff;
+  --fg-muted: #4e4a68;
+  --fg-dim:   #2e2b44;
+
+  /* Gradient — purple → warm orange (VoidZero / Vite DNA) */
+  --grad-a: #bd34fe;
+  --grad-b: #ff9966;
+  --gradient:      linear-gradient(135deg, #bd34fe 0%, #e8430a 55%, #ff9966 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(189,52,254,0.15) 0%, rgba(255,153,102,0.08) 100%);
+  --gradient-text: linear-gradient(135deg, #bd34fe 0%, #e8430a 50%, #ff9966 100%);
+  --gradient-line: linear-gradient(90deg, #bd34fe, #ff9966);
+
+  /* Glow */
+  --glow:      0 0 20px rgba(189,52,254,0.25), 0 0 60px rgba(189,52,254,0.08);
+  --glow-warm: 0 0 20px rgba(255,153,102,0.2);
+  --glow-card: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(255,255,255,0.06);
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: -apple-system, 'Inter', 'Geist', system-ui, sans-serif;
+
+  /* Layout */
+  --activity-bar-width: 3rem;
+  --sidebar-width: 228px;
+  --tabs-height: 2.25rem;
+  --status-bar-height: 1.5rem;
+  --radius: 0px; /* IDE = sharp */
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+/* ─── Noise / grid background — uses CSS var so themes can override ─ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, var(--dot-color, rgba(255,255,255,0.025)) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Radial ambient glow ────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(ellipse, var(--glow-bg, rgba(189,52,254,0.07)) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 4px; height: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(128,128,128,0.25); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.45); }
+* { scrollbar-width: thin; scrollbar-color: rgba(128,128,128,0.25) transparent; }
+
+/* ─── Light theme overrides ──────────────────────────────────────── */
+/* Anything that hardcodes rgba(255,255,255,…) needs to flip for light */
+[data-theme-dark="false"] ::-webkit-scrollbar-thumb       { background: rgba(0,0,0,0.18); }
+[data-theme-dark="false"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+
+/* ─── Focus ─────────────────────────────────────────────────────── */
+:focus { outline: none; }
+:focus-visible { outline: 1px solid var(--grad-a); outline-offset: -1px; }
+
+/* ─── Gradient text utility ─────────────────────────────────────── */
+.grad-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  :root { --sidebar-width: 100vw; }
+}

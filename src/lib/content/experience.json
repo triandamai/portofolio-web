@@ -1,0 +1,80 @@
+[
+  {
+    "company": "Maybank Indonesia",
+    "role": "Android Developer",
+    "period": "June 2025 – Present",
+    "location": "Jakarta, Indonesia",
+    "highlights": [
+      "Developing and maintaining Android features for one of Indonesia's largest banking apps",
+      "Working in a regulated fintech environment where code quality, security, and reliability are non-negotiable",
+      "Collaborating across mobile, backend, and QA teams to ship consistent, stable releases"
+    ]
+  },
+  {
+    "company": "Bluhabit",
+    "role": "Software Engineer",
+    "period": "May 2023 – Present",
+    "location": "Indonesia",
+    "highlights": [
+      "Leading end-to-end product engineering — from architecture decisions to production deployments",
+      "Designed the mobile and backend foundation, establishing patterns the team builds on every sprint",
+      "Balancing hands-on development with technical direction: writing code, reviewing PRs, and keeping the codebase honest"
+    ]
+  },
+  {
+    "company": "Prudential Indonesia",
+    "role": "Back End Developer",
+    "period": "Oct 2024 – June 2025",
+    "location": "Jakarta, Indonesia",
+    "highlights": [
+      "Built and maintained backend services for a life insurance platform serving hundreds of thousands of policyholders",
+      "Developed REST APIs using Spring Boot integrated with internal and third-party systems",
+      "Worked within strict enterprise standards — data consistency, audit trails, and uptime requirements all mattered here"
+    ]
+  },
+  {
+    "company": "BPJS Ketenagakerjaan",
+    "role": "Android Developer",
+    "period": "June 2023 – Jan 2025",
+    "location": "Jakarta, Indonesia",
+    "highlights": [
+      "Contributed to the Android app used by millions of Indonesian workers to access employment social security services",
+      "Worked at scale: performance, offline resilience, and accessibility were first-class concerns",
+      "Coordinated with cross-functional government and vendor teams to ship incremental updates on a strict release cycle"
+    ]
+  },
+  {
+    "company": "Accord Innovations · placed at PT Bank Mandiri",
+    "role": "Android Developer",
+    "period": "Nov 2022 – May 2023",
+    "location": "Jakarta, Indonesia",
+    "highlights": [
+      "Outsourced placement at PT Bank Mandiri, one of Indonesia's largest state-owned banks",
+      "Developed Android features in a large enterprise codebase with multiple parallel teams",
+      "Gained hands-on experience navigating the intersection of banking compliance and mobile UX"
+    ]
+  },
+  {
+    "company": "Tele Cexup Indonesia",
+    "role": "Senior Software Developer → Android Developer",
+    "period": "Nov 2020 – Nov 2022",
+    "location": "Jakarta, Indonesia",
+    "highlights": [
+      "Built healthcare Android apps integrated with IoT medical devices — ECG monitors, ultrasound, and vital-sign sensors",
+      "Connected hardware SDKs to a clean mobile UI so clinical staff could read and store readings without friction",
+      "Designed and maintained a Spring Boot backend for medical records, handling device data ingestion and storage",
+      "Promoted to Senior after a year; took on architecture ownership and code review responsibilities"
+    ]
+  },
+  {
+    "company": "PuskoMedia Indonesia Kreatif",
+    "role": "Android Developer",
+    "period": "Jan 2020 – Nov 2020",
+    "location": "Purwokerto, Indonesia",
+    "highlights": [
+      "Developed a village information system app used by local government to manage and distribute civic data",
+      "Built the Android client and backend for a delivery application, covering order flow from pickup to drop-off",
+      "First production role — learned the full cycle of shipping software to real users in a small, fast team"
+    ]
+  }
+]

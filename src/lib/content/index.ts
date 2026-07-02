@@ -17,6 +17,16 @@ export interface SnippetMeta {
 
 export const PROJECTS: ProjectMeta[] = [
   {
+    slug: "shipyard",
+    title: "Shipyard",
+    description: "Self-hosted PaaS for Docker orchestration — deploy, scale, and monitor containers from a single dashboard.",
+    tech: ["Go", "SvelteKit", "Docker", "Traefik", "WebSockets"],
+    repo: "",
+    demo: "https://shipyard.trian.space",
+    year: 2025,
+    featured: true
+  },
+  {
     slug: "portfolio-web",
     title: "Portfolio — IDE Edition",
     description: "This site. A SvelteKit portfolio styled like a VS Code–inspired editor.",

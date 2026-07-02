@@ -14,7 +14,7 @@
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       // images before links so the pattern doesn't conflict
-      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="img-link">$1</a>')
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="prose-img" loading="lazy" />')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
       .replace(/(\|.+\|\n\|[-| :]+\|\n(?:\|.+\|\n?)+)/g, renderTable)
       .replace(/((?:^- .+\n?)+)/gm, (block) => {
@@ -104,29 +104,32 @@
 
   .prose :global(p) { margin: 0.625rem 0; color: var(--fg-muted); }
 
-  /* Image-link: renders like a styled external button */
-  .prose :global(.img-link) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.375rem 0.875rem;
-    border: 0.5px solid var(--grad-a);
-    text-decoration: none;
-    border-bottom: none;
-    color: var(--fg) !important;
-    background: var(--gradient-soft);
-    transition: background 0.15s, box-shadow 0.15s;
-    margin: 0.5rem 0;
+  .prose :global(.prose-img) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 0.5px solid var(--border);
+    margin: 1.25rem 0;
+    object-fit: cover;
   }
 
-  .prose :global(.img-link:hover) {
-    background: rgba(189,52,254,0.15);
+  .prose :global(.screenshot-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+
+  .prose :global(.screenshot-grid .prose-img) {
+    margin: 0;
+    height: 180px;
+    cursor: zoom-in;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .prose :global(.screenshot-grid .prose-img:hover) {
+    border-color: var(--grad-a);
     box-shadow: var(--glow);
-    text-decoration: none;
-    border-bottom: none;
   }
 
   .prose :global(a) {

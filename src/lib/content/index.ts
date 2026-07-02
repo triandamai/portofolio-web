@@ -17,6 +17,16 @@ export interface SnippetMeta {
 
 export const PROJECTS: ProjectMeta[] = [
   {
+    slug: "cekmotor",
+    title: "cekmotor.id",
+    description: "AI-powered motorcycle appraisal SaaS — analyze condition and estimate fair market value against live Indonesian marketplace listings.",
+    tech: ["Next.js", "Rust", "PostgreSQL", "Gemini AI"],
+    repo: "",
+    demo: "",
+    year: 2025,
+    featured: true
+  },
+  {
     slug: "shipyard",
     title: "Shipyard",
     description: "Self-hosted PaaS for Docker orchestration — deploy, scale, and monitor containers from a single dashboard.",

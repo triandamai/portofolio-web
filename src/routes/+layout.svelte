@@ -11,6 +11,7 @@
   import CommandPalette from '$lib/components/CommandPalette.svelte';
   import MobileOverlay from '$lib/components/MobileOverlay.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
+  import OutlinePanel from '$lib/components/OutlinePanel.svelte';
 
   import { tabsStore, labelForPath } from '$lib/stores/tabs.svelte';
   import { commandPaletteStore } from '$lib/stores/commandPalette.svelte';
@@ -69,9 +70,12 @@
   <div class="editor-column">
     <TabsBar />
     <Breadcrumbs />
-    <main class="editor-area" id="main-content" tabindex="-1">
-      {@render children()}
-    </main>
+    <div class="editor-body">
+      <main class="editor-area" id="main-content" tabindex="-1">
+        {@render children()}
+      </main>
+      <OutlinePanel />
+    </div>
   </div>
 </div>
 
@@ -97,6 +101,13 @@
     min-width: 0;
   }
 
+  .editor-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+
   .editor-area {
     flex: 1;
     overflow-y: auto;
@@ -104,6 +115,7 @@
     background: transparent;
     position: relative;
     z-index: 1;
+    min-width: 0;
   }
 
   .editor-area:focus-visible { outline: none; }

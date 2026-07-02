@@ -3,7 +3,7 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────── */
 :root {
-  /* Backgrounds — deep purple-black, VoidZero-style */
+  /* Backgrounds — deep purple-black (Phantom theme default) */
   --bg:          #08060D;
   --bg-activity: #0a0812;
   --bg-sidebar:  #0d0b14;
@@ -20,10 +20,10 @@
 
   /* Foreground */
   --fg:       #f0eeff;
-  --fg-muted: #4e4a68;
-  --fg-dim:   #2e2b44;
+  --fg-muted: #9491b0;
+  --fg-dim:   #6a6785;
 
-  /* Gradient — purple → warm orange (VoidZero / Vite DNA) */
+  /* Gradient — purple → warm orange (Phantom accent) */
   --grad-a: #bd34fe;
   --grad-b: #ff9966;
   --gradient:      linear-gradient(135deg, #bd34fe 0%, #e8430a 55%, #ff9966 100%);

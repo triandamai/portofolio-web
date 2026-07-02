@@ -216,7 +216,7 @@
 
   button.active {
     color: var(--fg);
-    background: rgba(189,52,254,0.08);
+    background: var(--bg-active);
   }
 
   button.active::before { opacity: 1; }

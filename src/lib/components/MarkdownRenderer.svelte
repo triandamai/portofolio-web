@@ -1,14 +1,18 @@
 <script lang="ts">
   let { content }: { content: string } = $props();
 
+  function slugify(text: string): string {
+    return text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+  }
+
   function renderMarkdown(md: string): string {
     return md
       .replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
         `<pre class="code-block" data-lang="${lang || 'text'}"><div class="code-block__header"><span class="code-block__lang">${lang || 'text'}</span></div><code>${escHtml(code.trimEnd())}</code></pre>`
       )
-      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^### (.+)$/gm, (_, text) => `<h3 id="${slugify(text)}">${text}</h3>`)
+      .replace(/^## (.+)$/gm, (_, text) => `<h2 id="${slugify(text)}">${text}</h2>`)
+      .replace(/^# (.+)$/gm, (_, text) => `<h1 id="${slugify(text)}">${text}</h1>`)
       .replace(/^---$/gm, '<hr>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')

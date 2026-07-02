@@ -34,8 +34,8 @@ export interface Theme {
 
 export const THEMES: Theme[] = [
   {
-    id: 'voidzero',
-    name: 'VoidZero',
+    id: 'phantom',
+    name: 'Phantom',
     dark: true,
     preview: ['#08060D', '#bd34fe', '#ff9966'],
     vars: {
@@ -45,13 +45,13 @@ export const THEMES: Theme[] = [
       '--bg-tabs':        '#0a0812',
       '--bg-editor':      '#08060D',
       '--bg-hover':       'rgba(255,255,255,0.04)',
-      '--bg-active':      'rgba(255,255,255,0.07)',
+      '--bg-active':      'rgba(189,52,254,0.1)',
       '--bg-card':        'rgba(255,255,255,0.03)',
       '--border':         'rgba(255,255,255,0.08)',
       '--border-mid':     'rgba(255,255,255,0.13)',
       '--fg':             '#f0eeff',
-      '--fg-muted':       '#4e4a68',
-      '--fg-dim':         '#2e2b44',
+      '--fg-muted':       '#9491b0',
+      '--fg-dim':         '#6a6785',
       '--grad-a':         '#bd34fe',
       '--grad-b':         '#ff9966',
       '--gradient':       'linear-gradient(135deg,#bd34fe 0%,#e8430a 55%,#ff9966 100%)',
@@ -81,8 +81,8 @@ export const THEMES: Theme[] = [
       '--border':         'rgba(255,255,255,0.09)',
       '--border-mid':     'rgba(255,255,255,0.15)',
       '--fg':             '#f8f8f2',
-      '--fg-muted':       '#6272a4',
-      '--fg-dim':         '#44475a',
+      '--fg-muted':       '#8892be',
+      '--fg-dim':         '#6272a4',
       '--grad-a':         '#ff79c6',
       '--grad-b':         '#bd93f9',
       '--gradient':       'linear-gradient(135deg,#ff79c6 0%,#bd93f9 100%)',
@@ -112,8 +112,8 @@ export const THEMES: Theme[] = [
       '--border':         'rgba(255,255,255,0.08)',
       '--border-mid':     'rgba(136,192,208,0.2)',
       '--fg':             '#eceff4',
-      '--fg-muted':       '#4c566a',
-      '--fg-dim':         '#3b4252',
+      '--fg-muted':       '#8fa3b8',
+      '--fg-dim':         '#616e88',
       '--grad-a':         '#88c0d0',
       '--grad-b':         '#5e81ac',
       '--gradient':       'linear-gradient(135deg,#88c0d0 0%,#5e81ac 100%)',
@@ -143,8 +143,8 @@ export const THEMES: Theme[] = [
       '--border':         'rgba(255,255,255,0.07)',
       '--border-mid':     'rgba(203,166,247,0.2)',
       '--fg':             '#cdd6f4',
-      '--fg-muted':       '#45475a',
-      '--fg-dim':         '#313244',
+      '--fg-muted':       '#7f849c',
+      '--fg-dim':         '#6c7086',
       '--grad-a':         '#cba6f7',
       '--grad-b':         '#f38ba8',
       '--gradient':       'linear-gradient(135deg,#cba6f7 0%,#f38ba8 100%)',
@@ -229,7 +229,7 @@ export const THEMES: Theme[] = [
 const STORAGE_KEY = 'portfolio-theme';
 
 function createThemeStore() {
-  let themeId = $state('voidzero');
+  let themeId = $state('phantom');
 
   function applyTheme(id: string) {
     const theme = THEMES.find(t => t.id === id);

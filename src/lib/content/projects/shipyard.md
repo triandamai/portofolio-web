@@ -25,6 +25,7 @@ It's not meant to compete with production PaaS products. It's a learning project
 ![Homepage](/screenshots/shipyard/landing.webp)
 ![Dashboard — project list](/screenshots/shipyard/workspace.webp)
 ![Deploy panel](/screenshots/shipyard/deploy.webp)
+![Container inspect](/screenshots/shipyard/inspect.webp)
 
 ## How it works
 

@@ -17,7 +17,14 @@
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/`([^`]+)`/g, '<code>$1</code>')
-      // images before links so the pattern doesn't conflict
+      // 2+ consecutive image lines → screenshot grid
+      .replace(/((?:!\[[^\]]*\]\([^)]+\)[ \t]*\n?){2,})/g, (block) => {
+        const imgs = block.trim().split('\n')
+          .map(l => { const m = l.match(/!\[([^\]]*)\]\(([^)]+)\)/); return m ? `<img src="${m[2]}" alt="${m[1]}" class="prose-img" loading="lazy" />` : ''; })
+          .filter(Boolean).join('');
+        return `<div class="screenshot-grid">${imgs}</div>`;
+      })
+      // single images
       .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="prose-img" loading="lazy" />')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
       .replace(/(\|.+\|\n\|[-| :]+\|\n(?:\|.+\|\n?)+)/g, renderTable)
@@ -25,7 +32,7 @@
         const items = block.trim().split('\n').map(l => `<li>${l.replace(/^- /, '')}</li>`).join('');
         return `<ul>${items}</ul>`;
       })
-      .replace(/^(?!<[hupdbcts])(.+)$/gm, '<p>$1</p>')
+      .replace(/^(?!<\/?[hupdbctsi])(.+)$/gm, '<p>$1</p>')
       .replace(/<p>(<[hup])/g, '$1')
       .replace(/(<\/[hup][^>]*>)<\/p>/g, '$1');
   }

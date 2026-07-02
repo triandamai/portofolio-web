@@ -3,11 +3,6 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	server: {
-		hmr: {
-			protocol: 'wss',
-		},
-	},
 	plugins: [
 		sveltekit({
 			compilerOptions: {

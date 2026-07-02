@@ -1,8 +1,15 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { autoplaySignal } from '$lib/stores/music';
+
   let { data } = $props();
   const { trail } = data;
 
   const PHOTO_COUNT = 6;
+
+  onMount(() => {
+    autoplaySignal.set(true);
+  });
 </script>
 
 <svelte:head>

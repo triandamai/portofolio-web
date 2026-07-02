@@ -17,12 +17,22 @@ export interface SnippetMeta {
 
 export const PROJECTS: ProjectMeta[] = [
   {
+    slug: "uniflor",
+    title: "uniflor.ac.id",
+    description: "Rebuilt Universitas Flores' website from scratch after it was defaced with gambling content — new infra, Docker Swarm, server-driven UI, and auto-provisioned faculty subdomains.",
+    tech: ["Nuxt.js", "Supabase", "Cloudflare", "Docker Swarm"],
+    repo: "",
+    demo: "https://uniflor.ac.id/?lang=id",
+    year: 2024,
+    featured: true
+  },
+  {
     slug: "cekmotor",
     title: "cekmotor.id",
     description: "AI-powered motorcycle appraisal SaaS — analyze condition and estimate fair market value against live Indonesian marketplace listings.",
     tech: ["Next.js", "Rust", "PostgreSQL", "Gemini AI"],
     repo: "",
-    demo: "",
+    demo: "https://cekmotor.id",
     year: 2025,
     featured: true
   },
@@ -55,6 +65,26 @@ export const PROJECTS: ProjectMeta[] = [
     demo: "",
     year: 2022,
     featured: true
+  },
+  {
+    slug: "arta",
+    title: "Arta",
+    description: "Cross-platform expenses tracker in Compose Multiplatform — scan receipts with OCR for instant logging and keep pocket money in check.",
+    tech: ["Kotlin", "Compose Multiplatform", "OCR", "SQLDelight"],
+    repo: "",
+    demo: "",
+    year: 2024,
+    featured: false
+  },
+  {
+    slug: "tudu",
+    title: "Tudu",
+    description: "Android to-do app built with Kotlin and Jetpack Compose — a hobby project that started as a weekend experiment and shipped to the Play Store.",
+    tech: ["Kotlin", "Jetpack Compose", "Android"],
+    repo: "",
+    demo: "https://play.google.com/store/apps/details?id=app.trian.tudu",
+    year: 2023,
+    featured: false
   },
   {
     slug: "ktor-api",

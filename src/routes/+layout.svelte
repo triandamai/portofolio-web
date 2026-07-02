@@ -12,6 +12,7 @@
   import MobileOverlay from '$lib/components/MobileOverlay.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import OutlinePanel from '$lib/components/OutlinePanel.svelte';
+  import MusicPlayer from '$lib/components/MusicPlayer.svelte';
 
   import { tabsStore, labelForPath } from '$lib/stores/tabs.svelte';
   import { commandPaletteStore } from '$lib/stores/commandPalette.svelte';
@@ -82,6 +83,7 @@
 <StatusBar />
 <CommandPalette />
 <Dialog />
+<MusicPlayer />
 
 <style>
   .ide-layout {

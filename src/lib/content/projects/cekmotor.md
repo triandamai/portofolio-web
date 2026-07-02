@@ -4,7 +4,7 @@ title: "cekmotor.id"
 description: "AI-powered motorcycle appraisal SaaS — analyze physical condition, estimate fair market value, and compare against live marketplace listings."
 tech: ["Next.js", "Rust", "PostgreSQL", "Gemini AI"]
 repo: ""
-demo: ""
+demo: "https://cekmotor.id"
 year: 2025
 featured: true
 ---
@@ -12,6 +12,11 @@ featured: true
 # cekmotor.id
 
 > Buying or selling a used motorcycle in Indonesia shouldn't be a gamble. **cekmotor.id** gives you an AI-powered appraisal in minutes — not a gut feeling.
+
+## Screenshots
+![Appraisal flow](/screenshots/cekmotor/appraisal.webp)
+![AI condition report](/screenshots/cekmotor/report.webp)
+![Dealer dashboard](/screenshots/cekmotor/dashboard.webp)
 
 ## How it started
 

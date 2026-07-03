@@ -14,8 +14,8 @@ featured: false
 > Not every project needs a grand vision. Sometimes you just have an idea on a Sunday afternoon and you want to see where it goes.
 
 ## Screenshots
-![Task list](/screenshots/tudu/list.webp)
-![Add task](/screenshots/tudu/add.webp)
+![Overview](/screenshots/tudu/home.webp)
+![Add task](/screenshots/tudu/create.webp)
 ![Task detail](/screenshots/tudu/detail.webp)
 
 ## What it is

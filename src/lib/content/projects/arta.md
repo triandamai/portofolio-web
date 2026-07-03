@@ -14,8 +14,8 @@ featured: false
 > I kept telling myself I'd track my spending. I never did — until I made it fast enough that there was no excuse not to.
 
 ## Screenshots
-![Dashboard](/screenshots/arta/dashboard.webp)
-![Scan receipt](/screenshots/arta/scan.webp)
+![Dashboard](/screenshots/arta/home.webp)
+![Scan receipt](/screenshots/arta/receipt.webp)
 ![Expense history](/screenshots/arta/history.webp)
 
 ## The motivation

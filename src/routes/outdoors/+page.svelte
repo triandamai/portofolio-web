@@ -1,12 +1,5 @@
 <script lang="ts">
-  import type { Trail } from '$lib/content/outdoors';
   let { data } = $props();
-
-  let activeRegion = $state<string | null>(null);
-
-  const filtered = $derived(
-    activeRegion ? data.trails.filter(t => t.region === activeRegion) : data.trails
-  );
 </script>
 
 <svelte:head>
@@ -15,14 +8,14 @@
 </svelte:head>
 
 <div class="page-header">
-  <div class="page-header__text">
+  <div>
     <h1 class="page-title">outdoors.log</h1>
     <p class="page-sub">
       Trails, forests, summits, and places that don't have names on maps.
       The offline version of debugging — walk until the answer appears.
     </p>
   </div>
-  <div class="page-header__stats">
+  <div class="header-stats">
     <div class="stat">
       <span class="stat__value">{data.trails.length}</span>
       <span class="stat__label">entries</span>
@@ -34,75 +27,72 @@
   </div>
 </div>
 
-<!-- Region filter -->
-<div class="filter-row" role="group" aria-label="Filter by region">
-  <button
-    class="filter-chip"
-    class:active={activeRegion === null}
-    onclick={() => { activeRegion = null; }}
-  >All</button>
-  {#each data.regions as region}
-    <button
-      class="filter-chip"
-      class:active={activeRegion === region}
-      onclick={() => { activeRegion = region; }}
-    >{region}</button>
-  {/each}
-</div>
+<div class="logs">
+  {#each data.trails as trail, i}
+    <article class="log" class:log--right={i % 2 === 1}>
 
-<!-- Trail list -->
-<div class="trail-list">
-  {#each filtered as trail (trail.id)}
-    <article class="trail-card">
-      <div class="trail-card__accent"></div>
-      <div class="trail-card__body">
-
-        <div class="trail-card__top">
-          <div class="trail-card__title-row">
-            <h2 class="trail-card__name">{trail.name}</h2>
-            <span class="trail-card__date">{trail.date}</span>
-          </div>
-          <div class="trail-card__location">
-            <span class="location-icon" aria-hidden="true">◎</span>
-            {trail.location}
-          </div>
+      <div class="log__header">
+        <div class="log__meta">
+          <span class="region-chip">{trail.region}</span>
+          <span class="log__date">{trail.date}</span>
         </div>
-
-        {#if trail.elevation || trail.distance}
-          <div class="trail-card__meta">
-            {#if trail.elevation}
-              <span class="meta-chip">↑ {trail.elevation}</span>
-            {/if}
-            {#if trail.distance}
-              <span class="meta-chip">⟷ {trail.distance}</span>
-            {/if}
-          </div>
-        {/if}
-
-        <p class="trail-card__desc">{trail.description}</p>
-
-        <div class="trail-card__footer">
-          <div class="trail-card__tags">
-            {#each trail.tags as tag}
-              <span class="trail-tag">#{tag}</span>
-            {/each}
-          </div>
-          <a href="/outdoors/{trail.id}" class="trail-open-btn">open →</a>
+        <h2 class="log__name">{trail.name}</h2>
+        <div class="log__location">
+          <span aria-hidden="true">◎</span>
+          {trail.location}
         </div>
-
       </div>
+
+      {#if trail.elevation || trail.distance}
+        <div class="log__stats">
+          {#if trail.elevation}<span class="stat-chip">↑ {trail.elevation}</span>{/if}
+          {#if trail.distance}<span class="stat-chip">⟷ {trail.distance}</span>{/if}
+        </div>
+      {/if}
+
+      <p class="log__desc">{trail.description}</p>
+
+      <div class="gallery">
+        {#if trail.photos.length > 0}
+          {#each trail.photos as src, pi}
+            <a
+              href={src}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="gallery__cell"
+              class:gallery__cell--wide={pi === 0 && trail.photos.length >= 3}
+              aria-label="Photo {pi + 1}"
+            >
+              <img {src} alt="Photo {pi + 1} from {trail.name}" loading="lazy" />
+            </a>
+          {/each}
+        {:else}
+          {#each { length: 4 } as _, pi}
+            <div class="gallery__cell gallery__cell--placeholder" class:gallery__cell--wide={pi === 0} aria-hidden="true">
+              <span class="placeholder__num">{String(pi + 1).padStart(2, '0')}</span>
+              <span class="placeholder__label">photo</span>
+            </div>
+          {/each}
+        {/if}
+      </div>
+
+      <div class="log__tags">
+        {#each trail.tags as tag}
+          <span class="tag">#{tag}</span>
+        {/each}
+      </div>
+
     </article>
   {/each}
 </div>
 
 <style>
-  /* ── Header ── */
   .page-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 2rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 3rem;
     flex-wrap: wrap;
   }
 
@@ -123,19 +113,13 @@
     font-size: 0.85rem;
     color: var(--fg-muted);
     line-height: 1.6;
-    max-width: 56ch;
+    max-width: 52ch;
   }
 
-  .page-header__stats {
-    display: flex;
-    gap: 1.25rem;
-    flex-shrink: 0;
-  }
+  .header-stats { display: flex; gap: 1.25rem; flex-shrink: 0; }
 
   .stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
     border: 0.5px solid var(--border);
     padding: 0.5rem 1rem;
     background: var(--bg-card);
@@ -143,206 +127,190 @@
   }
 
   .stat__value {
-    font-family: var(--font-mono);
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700;
     background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
 
   .stat__label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--fg-muted);
+    font-family: var(--font-mono); font-size: 0.6rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-muted);
   }
 
-  /* ── Filter chips ── */
-  .filter-row {
+  /* ── Logs feed ── */
+  .logs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    margin-bottom: 1.75rem;
+    flex-direction: column;
+    gap: 4rem;
   }
 
-  .filter-chip {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    padding: 0.25rem 0.75rem;
-    background: none;
-    border: 0.5px solid var(--border);
-    color: var(--fg-muted);
-    cursor: pointer;
-    transition: color 0.12s, border-color 0.12s, background 0.12s;
-  }
-
-  .filter-chip:hover {
-    color: var(--fg);
-    border-color: var(--border-mid);
-  }
-
-  .filter-chip:focus-visible {
-    outline: 1px solid var(--grad-a);
-    outline-offset: -1px;
-  }
-
-  .filter-chip.active {
-    color: var(--fg);
-    border-color: var(--grad-a);
-    background: var(--bg-active);
-  }
-
-  /* ── Trail list ── */
-  .trail-list {
+  .log {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 800px;
+    max-width: 68%;
+    border-left: 2px solid var(--grad-a);
+    padding-left: 1.5rem;
   }
 
-  .trail-card {
+  .log--right {
+    align-self: flex-end;
+    border-left: none;
+    border-right: 2px solid var(--grad-b);
+    padding-left: 0;
+    padding-right: 1.5rem;
+    text-align: right;
+  }
+
+  /* ── Log header ── */
+  .log__meta {
     display: flex;
-    background: var(--bg-card);
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .log--right .log__meta { justify-content: flex-end; }
+
+  .region-chip {
+    font-family: var(--font-mono); font-size: 0.62rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    border: 0.5px solid var(--grad-a); color: var(--grad-a);
+    padding: 0.12rem 0.45rem;
+  }
+
+  .log__date {
+    font-family: var(--font-mono); font-size: 0.68rem; color: var(--fg-dim);
+  }
+
+  .log__name {
+    font-family: var(--font-mono);
+    font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+    background: var(--gradient-text);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin: 0; line-height: 1.2;
+  }
+
+  .log__location {
+    display: flex; align-items: center; gap: 0.35rem;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--fg-muted);
+  }
+
+  .log--right .log__location { justify-content: flex-end; }
+
+  /* ── Stats ── */
+  .log__stats { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .log--right .log__stats { justify-content: flex-end; }
+
+  .stat-chip {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: var(--fg-muted); border: 0.5px solid var(--border);
+    padding: 0.15rem 0.5rem; background: var(--bg-card);
+  }
+
+  /* ── Description ── */
+  .log__desc {
+    font-family: var(--font-sans); font-size: 0.9rem;
+    line-height: 1.85; color: var(--fg-muted); margin: 0;
+  }
+
+  /* ── Gallery ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 140px;
+    gap: 0.4rem;
+  }
+
+  .gallery__cell {
+    display: flex;
+    overflow: hidden;
     border: 0.5px solid var(--border);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.15s;
+    text-decoration: none;
+  }
+
+  /* first photo spans 2 columns when there are 3+ photos */
+  .gallery__cell--wide {
+    grid-column: span 2;
+  }
+
+  .gallery__cell:hover { border-color: var(--grad-a); }
+
+  .gallery__cell img {
+    width: 100%; height: 100%;
+    object-fit: cover; transition: transform 0.3s;
+  }
+
+  .gallery__cell:hover img { transform: scale(1.06); }
+
+  /* placeholder cells */
+  .gallery__cell--placeholder {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: var(--bg-card);
+    border-style: dashed;
+    position: relative;
     overflow: hidden;
   }
 
-  .trail-card:hover {
-    border-color: var(--border-mid);
-    box-shadow: var(--glow-card);
+  .gallery__cell--placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gradient-soft);
+    opacity: 0.4;
+    pointer-events: none;
   }
 
-  .trail-card__accent {
-    width: 3px;
-    flex-shrink: 0;
-    background: var(--gradient-line);
-  }
-
-  .trail-card__body {
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    flex: 1;
-    min-width: 0;
-  }
-
-  /* Top row */
-  .trail-card__top { display: flex; flex-direction: column; gap: 0.25rem; }
-
-  .trail-card__title-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .trail-card__name {
+  .placeholder__num {
     font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--fg);
-    margin: 0;
-  }
-
-  .trail-card__date {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--fg-muted);
-    flex-shrink: 0;
-  }
-
-  .trail-card__location {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
     background: var(--gradient-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    opacity: 0.35;
   }
 
-  .location-icon {
-    font-size: 0.65rem;
-    -webkit-text-fill-color: var(--grad-a);
-    flex-shrink: 0;
-  }
-
-  /* Meta chips (elevation, distance) */
-  .trail-card__meta {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .meta-chip {
+  .placeholder__label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--fg-muted);
-    border: 0.5px solid var(--border);
-    padding: 0.15rem 0.5rem;
-    background: var(--bg-sidebar);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    opacity: 0.5;
   }
 
-  /* Description */
-  .trail-card__desc {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: var(--fg-muted);
-    margin: 0;
+  /* ── Tags ── */
+  .log__tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .log--right .log__tags { justify-content: flex-end; }
+
+  .tag {
+    font-family: var(--font-mono); font-size: 0.62rem;
+    color: var(--fg-dim); opacity: 0.7;
   }
 
-  /* Footer row */
-  .trail-card__footer {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  .tag:hover { opacity: 1; }
 
-  /* Tags */
-  .trail-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-  }
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .log, .log--right {
+      max-width: 100%;
+      align-self: unset;
+      border-left: 2px solid var(--grad-a);
+      border-right: none;
+      padding-left: 1.25rem;
+      padding-right: 0;
+      text-align: left;
+    }
 
-  .trail-tag {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--fg-muted);
-    opacity: 0.7;
-  }
+    .log--right .log__meta,
+    .log--right .log__location,
+    .log--right .log__stats,
+    .log--right .log__tags { justify-content: flex-start; }
 
-  .trail-tag:hover { opacity: 1; }
-
-  /* Open link */
-  .trail-open-btn {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    flex-shrink: 0;
-    transition: opacity 0.12s;
-  }
-
-  .trail-open-btn:hover { opacity: 0.75; }
-
-  @media (max-width: 600px) {
-    .trail-card__body { padding: 1rem; }
     .page-header { flex-direction: column; gap: 1rem; }
   }
 </style>

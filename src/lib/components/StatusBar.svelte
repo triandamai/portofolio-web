@@ -23,7 +23,7 @@
 
   <div class="status-bar__right">
     <a
-      href="/resume/trian_damai_resume.pdf"
+      href="/resume/Trian_Damai_Resume_Software_Engineer.pdf"
       target="_blank"
       rel="noopener noreferrer"
       class="status-item status-resume"

@@ -148,7 +148,7 @@
 
   /* ── Set default volume on mount; restore saved position; clean up on unmount ── */
   onMount(() => {
-    if (audioEl) audioEl.volume = 0.65;
+    if (audioEl) audioEl.volume = 0.40;
     const saved = loadPos();
     if (saved) {
       pos = {

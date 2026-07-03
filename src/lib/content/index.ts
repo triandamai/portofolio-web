@@ -57,16 +57,6 @@ export const PROJECTS: ProjectMeta[] = [
     featured: true
   },
   {
-    slug: "android-compose",
-    title: "E-Commerce Android App",
-    description: "Production Android e-commerce app built 0→1 with Jetpack Compose and Clean Architecture.",
-    tech: ["Kotlin", "Jetpack Compose", "Ktor", "Room"],
-    repo: "https://github.com/triandamai",
-    demo: "",
-    year: 2022,
-    featured: true
-  },
-  {
     slug: "arta",
     title: "Arta",
     description: "Cross-platform expenses tracker in Compose Multiplatform — scan receipts with OCR for instant logging and keep pocket money in check.",
@@ -85,16 +75,6 @@ export const PROJECTS: ProjectMeta[] = [
     demo: "https://play.google.com/store/apps/details?id=app.trian.tudu",
     year: 2023,
     featured: false
-  },
-  {
-    slug: "ktor-api",
-    title: "Ktor REST + WebSocket API",
-    description: "High-throughput backend in Kotlin/Ktor with PostgreSQL, JWT auth, and real-time WebSocket channels.",
-    tech: ["Kotlin", "Ktor", "PostgreSQL", "WebSockets", "Docker"],
-    repo: "https://github.com/triandamai",
-    demo: "",
-    year: 2023,
-    featured: true
   }
 ];
 

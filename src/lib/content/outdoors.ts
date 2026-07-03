@@ -135,6 +135,32 @@ export const trails: Trail[] = [
       "Gede doesn't care what route you took to get there. The top is the top.",
     tags: ["summit", "West Java", "Gede", "Cibodas", "rain", "rainy season", "slippery", "long trek"],
     photos: []
+  },
+  {
+    id: "lembah-purba",
+    name: "Lembah Purba",
+    location: "Sukabumi, Jawa Barat",
+    region: "Java",
+    date: "2025",
+    description:
+      "Not a summit this time — Lembah Purba is a different kind of wild. " +
+      "Went with an expedition crew, one guide assigned to our group, and the plan was simple: " +
+      "go deep into the rainforest and see what it had. " +
+      "It started with the suspension bridge. And when they say it might be the longest in Southeast Asia, " +
+      "you sort of believe it once you're on it — " +
+      "swaying slightly, the canopy dropping away on both sides, the far end looking further than it should. " +
+      "You walk slowly. You hold the ropes. You keep moving. " +
+      "After the bridge, the trail cuts through dense forest to a waterfall — " +
+      "the kind that hits you with cold mist before you can even see it. " +
+      "Worth every step. " +
+      "Then the flying fox. Also long. Also high. " +
+      "I won't pretend I wasn't scared at the launch point — " +
+      "looking down at the treeline and being asked to just let go. " +
+      "But the second you're in the air, the fear turns into something else entirely. " +
+      "Fast, loud, ridiculous fun. " +
+      "Lembah Purba doesn't ask you to suffer for the view. It just asks you to show up.",
+    tags: ["rainforest", "West Java", "Sukabumi", "suspension bridge", "waterfall", "flying fox", "expedition", "adventure"],
+    photos: []
   }
 ];
 

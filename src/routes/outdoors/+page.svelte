@@ -11,14 +11,14 @@
 
 <svelte:head>
   <title>outdoors.log — Trian Damai</title>
-  <meta name="description" content="Trail log — hiking and trekking across Kalimantan and Java." />
+  <meta name="description" content="Trail log — hiking, trekking, and exploring wherever the trail goes." />
 </svelte:head>
 
 <div class="page-header">
   <div class="page-header__text">
     <h1 class="page-title">outdoors.log</h1>
     <p class="page-sub">
-      Trails, forests, islands, and summits. Mostly Kalimantan, increasingly Java.
+      Trails, forests, summits, and places that don't have names on maps.
       The offline version of debugging — walk until the answer appears.
     </p>
   </div>

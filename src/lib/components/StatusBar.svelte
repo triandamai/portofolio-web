@@ -1,12 +1,15 @@
 <script lang="ts">
-  import { page } from '$app/state';
+  import { page } from "$app/state";
 
   const lineCol = $derived(() => {
     const map: Record<string, string> = {
-      '/': 'Ln 1, Col 1', '/about': 'Ln 42, Col 1',
-      '/experience': 'Ln 1, Col 1', '/skills': 'Ln 1, Col 1', '/contact': 'Ln 28, Col 1'
+      "/": "Ln 1, Col 1",
+      "/about": "Ln 42, Col 1",
+      "/experience": "Ln 1, Col 1",
+      "/skills": "Ln 1, Col 1",
+      "/contact": "Ln 28, Col 1",
     };
-    return map[page.url.pathname] ?? 'Ln 1, Col 1';
+    return map[page.url.pathname] ?? "Ln 1, Col 1";
   });
 </script>
 
@@ -20,16 +23,28 @@
 
   <div class="status-bar__right">
     <a
-      href="/resume.pdf"
+      href="/resume/trian_damai_resume.pdf"
       target="_blank"
       rel="noopener noreferrer"
       class="status-item status-resume"
       aria-label="Download resume PDF"
-      download
-    >↓ Resume</a>
-    <a href="mailto:triandamai@gmail.com" class="status-item" aria-label="Email">✉</a>
-    <a href="https://github.com/triandamai" target="_blank" rel="noopener noreferrer" class="status-item">GitHub</a>
-    <a href="https://linkedin.com/in/triandamai" target="_blank" rel="noopener noreferrer" class="status-item">LinkedIn</a>
+      download>↓ Resume</a
+    >
+    <a href="mailto:triandamai@gmail.com" class="status-item" aria-label="Email"
+      >✉</a
+    >
+    <a
+      href="https://github.com/triandamai"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="status-item">GitHub</a
+    >
+    <a
+      href="https://linkedin.com/in/triandamai"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="status-item">LinkedIn</a
+    >
     <span class="status-item status-meta">{lineCol()}</span>
     <span class="status-item status-meta">UTF-8</span>
     <span class="status-item status-meta">LF</span>
@@ -44,7 +59,7 @@
     height: var(--status-bar-height);
     /* gradient bar — the one bold colour block */
     background: var(--gradient);
-    color: rgba(0,0,0,0.85);
+    color: rgba(0, 0, 0, 0.85);
     font-family: var(--font-mono);
     font-size: 0.68rem;
     font-weight: 500;
@@ -54,7 +69,8 @@
     z-index: 20;
   }
 
-  .status-bar__left, .status-bar__right {
+  .status-bar__left,
+  .status-bar__right {
     display: flex;
     align-items: center;
   }
@@ -66,24 +82,36 @@
     padding: 0 0.5rem;
     height: var(--status-bar-height);
     text-decoration: none;
-    color: rgba(0,0,0,0.8);
+    color: rgba(0, 0, 0, 0.8);
     white-space: nowrap;
     transition: background 0.12s;
   }
 
-  .status-item:hover { background: rgba(0,0,0,0.12); }
+  .status-item:hover {
+    background: rgba(0, 0, 0, 0.12);
+  }
 
-  a.status-item:focus-visible { outline: 1px solid rgba(0,0,0,0.5); outline-offset: -1px; }
+  a.status-item:focus-visible {
+    outline: 1px solid rgba(0, 0, 0, 0.5);
+    outline-offset: -1px;
+  }
 
-  .status-branch { font-weight: 700; color: rgba(0,0,0,0.9); }
+  .status-branch {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.9);
+  }
 
-  .branch-icon { font-size: 0.8rem; }
+  .branch-icon {
+    font-size: 0.8rem;
+  }
 
   .status-resume {
     font-weight: 700;
-    background: rgba(0,0,0,0.15);
+    background: rgba(0, 0, 0, 0.15);
     letter-spacing: 0.02em;
   }
 
-  .status-meta { color: rgba(0,0,0,0.55); }
+  .status-meta {
+    color: rgba(0, 0, 0, 0.55);
+  }
 </style>

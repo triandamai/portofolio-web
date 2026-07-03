@@ -7,13 +7,24 @@
     <span class="file-icon" aria-hidden="true">◧</span>
     <h1 class="page-title">resume.pdf</h1>
   </div>
-  <p class="page-sub">Trian Damai — Software Engineer · Android · Web · Backend</p>
+  <p class="page-sub">
+    Trian Damai — Software Engineer · Android · Web · Backend
+  </p>
 
   <div class="actions">
-    <a href="/resume.pdf" download="Trian-Damai-Resume.pdf" class="btn-primary">
+    <a
+      href="/resume/trian_damai_resume.pdf"
+      download="Trian-Damai-Resume.pdf"
+      class="btn-primary"
+    >
       ↓ Download PDF
     </a>
-    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+    <a
+      href="/resume/trian_damai_resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-secondary"
+    >
       ↗ Open in browser
     </a>
   </div>
@@ -44,7 +55,11 @@
     <div class="meta-row">
       <span class="meta-key">linkedin</span>
       <span class="meta-val">
-        <a href="https://linkedin.com/in/triandamai" target="_blank" rel="noopener noreferrer">linkedin.com/in/triandamai</a>
+        <a
+          href="https://linkedin.com/in/triandamai"
+          target="_blank"
+          rel="noopener noreferrer">linkedin.com/in/triandamai</a
+        >
       </span>
     </div>
   </div>
@@ -99,23 +114,29 @@
     flex-wrap: wrap;
   }
 
-  .btn-primary, .btn-secondary {
+  .btn-primary,
+  .btn-secondary {
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 600;
     text-decoration: none;
     padding: 0.55rem 1.25rem;
-    transition: opacity 0.15s, box-shadow 0.15s;
+    transition:
+      opacity 0.15s,
+      box-shadow 0.15s;
     letter-spacing: 0.02em;
   }
 
   .btn-primary {
     background: var(--gradient);
-    color: rgba(0,0,0,0.85);
+    color: rgba(0, 0, 0, 0.85);
     border: none;
   }
 
-  .btn-primary:hover { opacity: 0.88; box-shadow: var(--glow); }
+  .btn-primary:hover {
+    opacity: 0.88;
+    box-shadow: var(--glow);
+  }
 
   .btn-secondary {
     background: none;
@@ -123,7 +144,10 @@
     color: var(--fg-muted);
   }
 
-  .btn-secondary:hover { color: var(--fg); border-color: var(--grad-a); }
+  .btn-secondary:hover {
+    color: var(--fg);
+    border-color: var(--grad-a);
+  }
 
   /* JSON-style metadata block */
   .resume-meta {
@@ -138,9 +162,11 @@
   }
 
   .resume-meta::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0; left: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 3px;
     background: var(--gradient-line);
   }
@@ -170,5 +196,7 @@
     transition: border-color 0.12s;
   }
 
-  .meta-val a:hover { border-bottom-color: var(--grad-b); }
+  .meta-val a:hover {
+    border-bottom-color: var(--grad-b);
+  }
 </style>

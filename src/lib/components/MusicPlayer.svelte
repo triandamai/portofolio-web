@@ -94,12 +94,38 @@
   function onDragMove(e: PointerEvent) {
     const dx = e.clientX - dragStart.mx;
     const dy = e.clientY - dragStart.my;
-    if (!hasDragged && Math.hypot(dx, dy) < 5) return;
+    if (!hasDragged && Math.hypot(dx, dy) < 8) return;
     hasDragged = true;
     pos = {
       x: Math.max(0, Math.min(dragStart.ex + dx, window.innerWidth  - rootEl.offsetWidth)),
       y: Math.max(0, Math.min(dragStart.ey + dy, window.innerHeight - rootEl.offsetHeight)),
     };
+  }
+
+  function clampToViewport() {
+    if (!rootEl || !pos) return;
+    const w = rootEl.offsetWidth;
+    const h = rootEl.offsetHeight;
+    const clamped = {
+      x: Math.max(0, Math.min(pos.x, window.innerWidth  - w)),
+      y: Math.max(0, Math.min(pos.y, window.innerHeight - h)),
+    };
+    pos = clamped;
+    savePos(clamped);
+  }
+
+  function snapToEdge() {
+    if (!rootEl) return;
+    const w = rootEl.offsetWidth;
+    const h = rootEl.offsetHeight;
+    const curX = pos?.x ?? (window.innerWidth - w - 16);
+    const curY = pos?.y ?? (window.innerHeight - h - 64);
+    const snapped = {
+      x: (curX + w / 2) < window.innerWidth / 2 ? 0 : window.innerWidth - w,
+      y: Math.max(0, Math.min(curY, window.innerHeight - h)),
+    };
+    pos = snapped;
+    savePos(snapped);
   }
 
   function endDrag() {
@@ -110,13 +136,26 @@
     window.removeEventListener('pointermove',   onDragMove);
     window.removeEventListener('pointerup',     endDrag);
     window.removeEventListener('pointercancel', endDrag);
-    if (pos) savePos(pos);
+    if (view === 'closed') {
+      // defer one frame so the is-dragging class (transition:none) is removed
+      // before we update pos — otherwise browser applies both in the same paint
+      // and the CSS transition never fires
+      requestAnimationFrame(snapToEdge);
+    } else if (pos) {
+      savePos(pos);
+    }
   }
 
   /* ── Set default volume on mount; restore saved position; clean up on unmount ── */
   onMount(() => {
     if (audioEl) audioEl.volume = 0.65;
-    pos = loadPos();
+    const saved = loadPos();
+    if (saved) {
+      pos = {
+        x: Math.max(0, Math.min(saved.x, window.innerWidth  - 300)),
+        y: Math.max(0, Math.min(saved.y, window.innerHeight - 60)),
+      };
+    }
     return () => endDrag();
   });
 
@@ -161,7 +200,13 @@
     <button
       class="reopen-pill"
       onpointerdown={startDrag}
-      onclick={() => { if (!hasDragged) view = 'mini'; }}
+      onclick={() => {
+        if (hasDragged) return;
+        view = 'mini';
+        // pos was sized for the 30px pill; after Svelte renders the 300px player
+        // we re-clamp so it doesn't extend off the right edge
+        requestAnimationFrame(clampToViewport);
+      }}
       aria-label="Open music player"
     >
       {#if playing}<span class="reopen-pulse" aria-hidden="true"></span>{/if}
@@ -261,7 +306,7 @@
         </button>
 
         <!-- Close -->
-        <button class="ctrl close" onclick={() => { view = 'closed'; }} aria-label="Close player">
+        <button class="ctrl close" onclick={() => { view = 'closed'; requestAnimationFrame(snapToEdge); }} aria-label="Close player">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </div>
@@ -286,7 +331,11 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 0;
+    transition: left 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+                top  0.22s ease;
   }
+
+  .root.is-dragging { transition: none; }
 
   /* ── Closed pill ── */
   .reopen-pill {
@@ -294,10 +343,12 @@
     width: 30px; height: 30px;
     background: var(--bg-sidebar);
     border: 0.5px solid var(--border-mid);
-    color: var(--fg-muted); cursor: pointer;
+    color: var(--fg-muted); cursor: grab;
     box-shadow: var(--glow-card); position: relative;
     transition: color 0.15s, border-color 0.15s;
+    touch-action: none;
   }
+  .reopen-pill:active { cursor: grabbing; }
   .reopen-pill:hover { color: var(--fg); border-color: var(--grad-a); }
   .reopen-pill:focus-visible { outline: 1px solid var(--grad-a); outline-offset: -1px; }
 
@@ -314,8 +365,7 @@
   }
 
   /* ── Dragging state ── */
-  .root.is-dragging * { pointer-events: none; }
-  .root.is-dragging   { cursor: grabbing !important; user-select: none; }
+  .root.is-dragging { cursor: grabbing !important; user-select: none; }
 
   /* ── Drag handle ── */
   .drag-handle {
@@ -521,5 +571,8 @@
     max-width: 100%;
   }
 
-  @media (max-width: 767px) { .root { display: none; } }
+  @media (max-width: 767px) {
+    .root { bottom: 4rem; right: 0.75rem; }
+    .player { width: 260px; }
+  }
 </style>

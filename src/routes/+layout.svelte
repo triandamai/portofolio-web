@@ -2,6 +2,7 @@
   import '../app.css';
   import { page } from '$app/state';
   import { onMount } from 'svelte';
+  import { afterNavigate } from '$app/navigation';
 
   import ActivityBar from '$lib/components/ActivityBar.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
@@ -31,6 +32,10 @@
   $effect(() => {
     const path = page.url.pathname;
     tabsStore.open({ path, label: labelForPath(path) });
+  });
+
+  afterNavigate(() => {
+    document.getElementById('main-content')?.scrollTo({ top: 0 });
   });
 
   function handleGlobalKeydown(e: KeyboardEvent) {

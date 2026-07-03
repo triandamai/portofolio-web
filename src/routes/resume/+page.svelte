@@ -13,14 +13,14 @@
 
   <div class="actions">
     <a
-      href="/resume/trian_damai_resume.pdf"
+      href="/resume/Trian_Damai_Resume_Software_Engineer.pdf"
       download="Trian-Damai-Resume.pdf"
       class="btn-primary"
     >
       ↓ Download PDF
     </a>
     <a
-      href="/resume/trian_damai_resume.pdf"
+      href="/resume/Trian_Damai_Resume_Software_Engineer.pdf"
       target="_blank"
       rel="noopener noreferrer"
       class="btn-secondary"

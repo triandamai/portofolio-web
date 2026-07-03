@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bg-glow" cx="28%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#bd34fe" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#bd34fe" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-glow2" cx="85%" cy="80%" r="40%">
+      <stop offset="0%" stop-color="#ff9966" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ff9966" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent-line" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#bd34fe"/>
+      <stop offset="100%" stop-color="#ff9966"/>
+    </linearGradient>
+    <linearGradient id="text-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#bd34fe"/>
+      <stop offset="50%"  stop-color="#e8430a"/>
+      <stop offset="100%" stop-color="#ff9966"/>
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.03)"/>
+    </pattern>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#08060D"/>
+  <!-- Dot grid -->
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <!-- Ambient glows -->
+  <rect width="1200" height="630" fill="url(#bg-glow)"/>
+  <rect width="1200" height="630" fill="url(#bg-glow2)"/>
+
+  <!-- Left accent bar -->
+  <rect x="72" y="100" width="3" height="430" fill="url(#accent-line)" rx="1.5"/>
+
+  <!-- Top label -->
+  <text x="96" y="136" font-family="monospace,ui-monospace,Courier New" font-size="17" letter-spacing="3" fill="#6a6785" font-weight="600">PORTFOLIO</text>
+
+  <!-- Name -->
+  <text x="96" y="262" font-family="monospace,ui-monospace,Courier New" font-size="80" font-weight="800" fill="url(#text-grad)">Trian Damai</text>
+
+  <!-- Role -->
+  <text x="98" y="324" font-family="monospace,ui-monospace,Courier New" font-size="28" fill="#9491b0" font-weight="400">Software Engineer · Full Stack · Android</text>
+
+  <!-- Divider line -->
+  <rect x="96" y="358" width="520" height="1" fill="rgba(255,255,255,0.08)"/>
+
+  <!-- Tech stack chips -->
+  <!-- SvelteKit -->
+  <rect x="96"  y="380" width="110" height="34" rx="4" fill="rgba(189,52,254,0.12)" stroke="#bd34fe" stroke-width="0.5"/>
+  <text x="151" y="402" font-family="monospace,ui-monospace,Courier New" font-size="14" fill="#bd34fe" text-anchor="middle" font-weight="600">SvelteKit</text>
+  <!-- Kotlin -->
+  <rect x="218" y="380" width="84"  height="34" rx="4" fill="rgba(255,153,102,0.10)" stroke="#ff9966" stroke-width="0.5"/>
+  <text x="260" y="402" font-family="monospace,ui-monospace,Courier New" font-size="14" fill="#ff9966" text-anchor="middle" font-weight="600">Kotlin</text>
+  <!-- TypeScript -->
+  <rect x="314" y="380" width="114" height="34" rx="4" fill="rgba(189,52,254,0.08)" stroke="rgba(189,52,254,0.4)" stroke-width="0.5"/>
+  <text x="371" y="402" font-family="monospace,ui-monospace,Courier New" font-size="14" fill="#9491b0" text-anchor="middle" font-weight="600">TypeScript</text>
+  <!-- Android -->
+  <rect x="440" y="380" width="90"  height="34" rx="4" fill="rgba(255,153,102,0.07)" stroke="rgba(255,153,102,0.3)" stroke-width="0.5"/>
+  <text x="485" y="402" font-family="monospace,ui-monospace,Courier New" font-size="14" fill="#9491b0" text-anchor="middle" font-weight="600">Android</text>
+
+  <!-- Bottom line: URL prompt -->
+  <text x="96"  y="490" font-family="monospace,ui-monospace,Courier New" font-size="18" fill="#6a6785">~/projects</text>
+  <text x="96"  y="514" font-family="monospace,ui-monospace,Courier New" font-size="18" fill="#4a4565">❯ <tspan fill="#bd34fe">open</tspan> trian.space</text>
+
+  <!-- Decorative code block (right side) -->
+  <rect x="740" y="100" width="388" height="430" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+  <!-- code lines decoration -->
+  <text x="760" y="140" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#6a6785">// about.ts</text>
+  <text x="760" y="172" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">const <tspan fill="#9491b0">me</tspan> = {</text>
+  <text x="760" y="196" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  name: <tspan fill="#ff9966">'Trian Damai'</tspan>,</text>
+  <text x="760" y="220" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  role: <tspan fill="#ff9966">'Full Stack'</tspan>,</text>
+  <text x="760" y="244" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  based: <tspan fill="#ff9966">'Kalimantan'</tspan>,</text>
+  <text x="760" y="268" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  stack: [</text>
+  <text x="760" y="292" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#ff9966">    'SvelteKit'<tspan fill="#4a4565">,</tspan></text>
+  <text x="760" y="316" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#ff9966">    'Kotlin'<tspan fill="#4a4565">,</tspan></text>
+  <text x="760" y="340" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#ff9966">    'TypeScript'<tspan fill="#4a4565">,</tspan></text>
+  <text x="760" y="364" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#ff9966">    'Android'</text>
+  <text x="760" y="388" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  ],</text>
+  <text x="760" y="412" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  hiking: <tspan fill="#bd34fe">true</tspan>,</text>
+  <text x="760" y="436" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">  coffee: <tspan fill="#bd34fe">always</tspan></text>
+  <text x="760" y="460" font-family="monospace,ui-monospace,Courier New" font-size="13" fill="#4a4565">}</text>
+  <!-- cursor blink -->
+  <rect x="760" y="474" width="10" height="18" rx="1" fill="#bd34fe" opacity="0.8"/>
+</svg>

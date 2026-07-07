@@ -79,6 +79,7 @@ export const PROJECTS: ProjectMeta[] = [
 ];
 
 export const SNIPPETS: SnippetMeta[] = [
+  { slug: "axum-sse", filename: "axum-sse.rs", language: "rust" },
   { slug: "debounce", filename: "debounce.ts", language: "typescript" },
   { slug: "binary-search", filename: "binary-search.ts", language: "typescript" }
 ];

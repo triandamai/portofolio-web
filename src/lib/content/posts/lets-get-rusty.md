@@ -54,6 +54,8 @@ class UserService {
 
 Coming from zero background, this was a revelation. Define the contract first. Implement it separately. The compiler enforces every rule — wrong type, missing method, it won't compile.
 
+And then, of course, there was the **Garbage Collector (GC)**. In Java, memory management is completely automated. You instantiate an object with `new`, use it, and forget about it. Under the hood, the JVM runs a background thread that periodically inspects the heap, tracks active references, and automatically deallocates objects that are no longer reachable. For a beginner, this felt like absolute magic. I didn't need to worry about memory leaks, dangling pointers, or manually calling `free()` like I had to do in C. The GC was my safety net, ensuring I could focus purely on building things.
+
 Java is the language that formed my entire mental model of what programming is supposed to be. Code should be structured. Things should have clear responsibilities. Architecture matters. From the moment I understood that, I couldn't un-know it.
 
 I've been writing Java ever since, in one form or another.
@@ -64,7 +66,9 @@ Java is great. Java is also heavy.
 
 Give Java 8GB of RAM and it will find a way to use all of it. The JVM startup time, the memory overhead, the verbosity of certain patterns — these are real costs. You trade performance and resource efficiency for developer productivity and ecosystem maturity. That's a valid trade in a lot of contexts, but it's still a trade.
 
-![Java eating all your RAM](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuFof6n24fdtlHURawv4KSmu__Ju5x1Me_L_aNvdPz_UpJO9dOj1OkCxY&s=10)
+The Garbage Collector, while convenient, isn't free. It requires extra memory overhead to track references, and it introduces "Stop-the-World" pauses where the entire application pauses to clean up the heap. As a result, even a simple Java backend needs a relatively beefy container to run comfortably without running out of memory.
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuuFof6n24fdtlHURawv4KSmu__Ju5x1Me_L_aNvdPz_UpJO9dOj1OkCxY&s=10" alt="Java eating all your RAM" style="max-width: 300px; width: 100%; display: block; margin: 1.5rem auto; border-radius: 8px;" />
 
 I accepted those tradeoffs for years without thinking too hard about them.
 
@@ -108,14 +112,43 @@ It was hard. The compiler was strict in ways that felt almost confrontational at
 
 But I kept going. And the more I tried, the more the concepts started to settle.
 
-**Ownership** started to make sense once I stopped fighting it and started thinking in terms of who is responsible for a piece of data and when.
+**Ownership** is Rust's core memory management mechanism. In C/C++ you manage memory manually, which is error-prone. In Java, a garbage collector cleans it up at runtime. Rust takes a third path: Ownership. Every value in Rust has a variable called its *owner*. There can only be one owner at a time, and when the owner goes out of scope, the value is automatically dropped. If you pass a value to another function, the ownership "moves" to that function, and the original variable becomes invalid. This technical guarantee ensures memory safety with absolutely zero runtime overhead.
 
-**Lifetimes** — which look terrifying when you first see the `'a` syntax — turned out to be the compiler's way of asking: *how long does this reference actually need to be valid?* Once I framed it that way, it wasn't magic, it was just explicit logic.
+**Lifetimes** are the compiler's way of checking references (borrows). Since Rust lets you reference data without taking ownership, there is a risk of a "dangling reference" — a reference to data that has already been cleared from memory. To prevent this, Rust uses lifetimes (often annotated with syntax like `'a`). A lifetime is a static analysis parameter that proves to the borrow checker that a reference is valid for exactly as long as the data it points to is alive. It's essentially the compiler verifying: *you cannot use this reference because the owner of the data has already been dropped.*
 
-**Traits** felt familiar after years of Java interfaces, but more composable, more precise. You're not inheriting a hierarchy — you're describing capabilities.
+**Traits** are Rust's approach to polymorphism and shared behavior, similar to Java's interfaces but much more powerful. Instead of inheriting behavior from parent classes, you define traits to describe capabilities (e.g., `Display` for things that can be printed, or `Serialize` for things that can be converted to JSON). You can implement traits for any type, including those you don't own (like standard library types), which enables highly composable, decoupled, and clean code architectures without the baggage of deep class inheritance trees.
 
-**Macros** were the part that still surprises me. The `macro_rules!` system and procedural macros let Rust extend itself in ways that feel almost like a different language living inside the language. Strange and powerful.
+**Macros** are metaprogramming tools that look like functions (marked with a `!`, like `println!`) but behave differently. Instead of executing code at runtime, macros expand into code at compile time. Rust macros are "hygienic", meaning they don't accidentally mess with variables in the scope they are called in. They allow you to write boilerplate-free code, perform compile-time checks, and define domain-specific syntax inside Rust itself.
+
+On a personal note, beyond these technical features, **I absolutely love how Rust's syntax is written**. Coming from the verbosity of Java and the wildcard nature of JavaScript/TypeScript, Rust's syntax feels incredibly clean, expressive, and deliberate. Pattern matching with the `match` control flow is an absolute joy, expression-based blocks make code flow naturally without redundant return statements, and the functional-style combinators (`.map()`, `.and_then()`, `.filter()`) make data transformations look beautiful and readable.
+
+## Running on Rust: Personal Projects and Small Infra
+
+Over the last few years, I started transitioning to Rust for my personal projects and freelance work. I mostly build backend services with it, and the reasons are simple: memory footprint and deployment efficiency.
+
+In the JVM world, a simple Spring Boot app might easily idle at 200MB–400MB of RAM. If you want to host five different microservices for various side projects, you'd need a beefy server just to keep them running. With Rust, a compiled binary is extremely small and typically idles at a mere 10MB–20MB of RAM. It handles high throughput with almost zero CPU overhead, and compile-time checks mean it rarely crashes in production.
+
+Because of this efficiency, I can run multiple Rust backends on a very small, inexpensive cloud infrastructure without breaking a sweat.
+
+In fact, **this very website** (`portfolio-web`), along with my other apps running under the `trian.space` domain, are all running on top of **[Shipyard](/projects/shipyard)**.
+
+Shipyard is my personal open-source project — a self-hosted Platform-as-a-Service (PaaS) that behaves like a private Vercel or Heroku. I built it completely on top of Rust. It communicates with Docker via WebSockets, automatically manages container deployments, handles SSL certificates, orchestrates Docker Swarms, and streams real-time deployment logs. Building Shipyard in Rust allowed me to construct a highly reliable, concurrent orchestration system that uses almost no system resources.
+
+## Conclusion: A Shift in the Mental Model
+
+At the end of the day, I love using Rust not because of the hype, and not because it's the popular language that everyone on the internet is talking about.
+
+I use Rust because it fundamentally changes the way we think about writing code.
+
+The concepts that Rust introduces aren't arbitrary rules meant to make your life harder. In fact, even if Rust had never been created, its mental model represents how we as programmers *should* be thinking about our code anyway. We should always be asking:
+- Who owns this data?
+- When is this memory allocated?
+- How long does this reference need to exist?
+- When can this resource be safely freed?
+
+Java hides these questions behind the Garbage Collector, and C makes them dangerous. Rust brings them to the forefront, forces you to answer them at compile time, and rewards you with software that is both blazingly fast and rock-solid.
 
 ---
 
-*Still going — next I want to write about what it actually feels like to build something real in Rust, where the language gets out of your way and where it doesn't, and whether I think it's worth recommending to someone who, like me, started with Java.*
+Thank you so much for taking the time to read my thoughts! If you want to discuss this post, share your own journey, or talk about Rust and Java, feel free to reach out. You can find all my details and contact form on my [contact](/contact) page. I'd love to hear your perspective!
+

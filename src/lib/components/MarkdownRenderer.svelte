@@ -116,11 +116,10 @@
 
   .prose :global(.prose-img) {
     display: block;
-    width: 100%;
     max-width: 100%;
+    height: auto;
     border: 0.5px solid var(--border);
-    margin: 1.25rem 0;
-    object-fit: cover;
+    margin: 1.25rem auto;
   }
 
   .prose :global(.screenshot-grid) {

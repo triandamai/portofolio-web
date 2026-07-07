@@ -13,7 +13,7 @@ export const POSTS: Post[] = [
     title: "Let's Get Rusty 🦀",
     date: '2025-07',
     tags: ['rust', 'java', 'opinion', 'programming'],
-    published: false,
+    published: true,
     excerpt:
       'A personal journey from APK modding and Eclipse to falling in love with Rust — and why Java will always be the language that shaped how I think about code.',
   },

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="380" viewBox="0 0 680 380">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#bd34fe"/>
+      <stop offset="100%" stop-color="#ff9966"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3dd68c"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="680" height="380" fill="#0d0b14" rx="8"/>
+  <rect width="680" height="380" fill="url(#grad)" opacity="0.04" rx="8"/>
+
+  <!-- border -->
+  <rect x="1" y="1" width="678" height="378" fill="none" stroke="rgba(189,52,254,0.25)" stroke-width="1" rx="8"/>
+
+  <!-- top label -->
+  <text x="340" y="36" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="3">M E M E . R S</text>
+
+  <!-- ── LEFT PANEL ── -->
+  <rect x="30" y="55" width="290" height="290" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- panel 1 label -->
+  <text x="175" y="82" font-family="monospace,ui-monospace" font-size="11" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="1">BEFORE</text>
+
+  <!-- RAM chip illustration left -->
+  <rect x="95" y="98" width="160" height="90" rx="4" fill="#1a1825" stroke="rgba(61,214,140,0.4)" stroke-width="1.5"/>
+  <text x="175" y="133" font-family="monospace,ui-monospace" font-size="11" fill="#3dd68c" text-anchor="middle" letter-spacing="1">RAM</text>
+  <text x="175" y="153" font-family="monospace,ui-monospace" font-size="22" fill="#f0eeff" text-anchor="middle" font-weight="800">8 GB</text>
+  <text x="175" y="174" font-family="monospace,ui-monospace" font-size="10" fill="rgba(61,214,140,0.7)" text-anchor="middle">● available</text>
+
+  <!-- RAM bar left (full, green) -->
+  <rect x="65" y="208" width="220" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="65" y="208" width="220" height="16" rx="3" fill="url(#green)" opacity="0.9"/>
+  <text x="175" y="220" font-family="monospace,ui-monospace" font-size="9" fill="#0d0b14" text-anchor="middle" font-weight="700">████████████████ 100%</text>
+
+  <!-- caption left -->
+  <text x="175" y="256" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">Me: "I have plenty</text>
+  <text x="175" y="274" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">of RAM, let's run</text>
+  <text x="175" y="292" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">a Java app  ☕"</text>
+  <text x="175" y="326" font-family="monospace,ui-monospace" font-size="11" fill="rgba(61,214,140,0.6)" text-anchor="middle">✓ 8192 MB free</text>
+
+  <!-- divider -->
+  <line x1="340" y1="60" x2="340" y2="340" stroke="rgba(189,52,254,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
+  <rect x="323" y="188" width="34" height="24" rx="4" fill="#0d0b14" stroke="rgba(189,52,254,0.3)" stroke-width="0.5"/>
+  <text x="340" y="204" font-family="monospace,ui-monospace" font-size="13" fill="rgba(189,52,254,0.7)" text-anchor="middle">→</text>
+
+  <!-- ── RIGHT PANEL ── -->
+  <rect x="360" y="55" width="290" height="290" rx="6" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- panel 2 label -->
+  <text x="505" y="82" font-family="monospace,ui-monospace" font-size="11" fill="rgba(255,255,255,0.3)" text-anchor="middle" letter-spacing="1">AFTER java.exe STARTS</text>
+
+  <!-- RAM chip illustration right -->
+  <rect x="425" y="98" width="160" height="90" rx="4" fill="#1a1825" stroke="rgba(239,68,68,0.5)" stroke-width="1.5"/>
+  <text x="505" y="133" font-family="monospace,ui-monospace" font-size="11" fill="#ef4444" text-anchor="middle" letter-spacing="1">RAM</text>
+  <text x="505" y="153" font-family="monospace,ui-monospace" font-size="22" fill="#f0eeff" text-anchor="middle" font-weight="800">47 MB</text>
+  <text x="505" y="174" font-family="monospace,ui-monospace" font-size="10" fill="rgba(239,68,68,0.7)" text-anchor="middle">● remaining</text>
+
+  <!-- RAM bar right (nearly full, red) -->
+  <rect x="395" y="208" width="220" height="16" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="395" y="208" width="214" height="16" rx="3" fill="url(#red)" opacity="0.9"/>
+  <!-- tiny remaining bit -->
+  <rect x="609" y="208" width="6" height="16" rx="2" fill="rgba(61,214,140,0.5)"/>
+  <text x="505" y="220" font-family="monospace,ui-monospace" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">███████████████▌ 99.4%</text>
+
+  <!-- caption right -->
+  <text x="505" y="256" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">Java: "don't worry</text>
+  <text x="505" y="274" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">I'll just borrow</text>
+  <text x="505" y="292" font-family="monospace,ui-monospace" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">a little  🔥"</text>
+  <text x="505" y="326" font-family="monospace,ui-monospace" font-size="11" fill="rgba(239,68,68,0.7)" text-anchor="middle">⚠ 47 MB free · GC running</text>
+
+  <!-- bottom caption -->
+  <text x="340" y="362" font-family="monospace,ui-monospace" font-size="11" fill="rgba(189,52,254,0.5)" text-anchor="middle" letter-spacing="1">// give java 8GB ram, java will eat all of them :-)</text>
+</svg>

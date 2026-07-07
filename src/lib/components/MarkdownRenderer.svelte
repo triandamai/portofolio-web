@@ -7,9 +7,7 @@
 
   function renderMarkdown(md: string): string {
     return md
-      .replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
-        `<pre class="code-block" data-lang="${lang || 'text'}"><div class="code-block__header"><span class="code-block__lang">${lang || 'text'}</span></div><code>${escHtml(code.trimEnd())}</code></pre>`
-      )
+      // code blocks are pre-highlighted server-side; skip them here
       .replace(/^### (.+)$/gm, (_, text) => `<h3 id="${slugify(text)}">${text}</h3>`)
       .replace(/^## (.+)$/gm, (_, text) => `<h2 id="${slugify(text)}">${text}</h2>`)
       .replace(/^# (.+)$/gm, (_, text) => `<h1 id="${slugify(text)}">${text}</h1>`)
@@ -32,7 +30,8 @@
         const items = block.trim().split('\n').map(l => `<li>${l.replace(/^- /, '')}</li>`).join('');
         return `<ul>${items}</ul>`;
       })
-      .replace(/^(?!<\/?[hupdbctsi])(.+)$/gm, '<p>$1</p>')
+      // skip any line already starting with an HTML tag
+      .replace(/^(?!<)(.+)$/gm, '<p>$1</p>')
       .replace(/<p>(<[hup])/g, '$1')
       .replace(/(<\/[hup][^>]*>)<\/p>/g, '$1');
   }
@@ -192,16 +191,47 @@
     background-clip: text;
   }
 
-  .prose :global(.code-block code) {
-    display: block;
-    padding: 1rem 0.875rem;
+  /* shiki-highlighted pre */
+  .prose :global(.code-block .shiki) {
+    background: transparent !important;
+    margin: 0;
+    padding: 0.875rem;
     overflow-x: auto;
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    line-height: 1.65;
+    line-height: 0.6;
+  }
+
+  .prose :global(.code-block .shiki code) {
+    background: none !important;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .prose :global(.code-block .shiki .line) {
+    display: block;
+  }
+
+  /* plain text fallback */
+  .prose :global(.code-block__plain) {
+    background: transparent;
+    margin: 0;
+    padding: 0.875rem;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 0.6;
     color: var(--fg);
+  }
+
+  .prose :global(.code-block__plain code) {
     background: none;
     border: none;
+    padding: 0;
+    color: inherit;
   }
 
   .prose :global(ul) { padding-left: 1.25rem; margin: 0.5rem 0; }

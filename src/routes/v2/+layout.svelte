@@ -14,8 +14,12 @@
     { href: '/v2', label: 'Home', icon: 'home' },
     { href: '/v2/projects', label: 'Work', icon: 'deployed_code', match: ['/v2/projects'] },
     { href: '/v2/blog', label: 'Writing', icon: 'edit_note', match: ['/v2/blog'] },
-    { href: '/v2/system', label: 'System', icon: 'palette' }
+    { href: '/v2/outdoors', label: 'Outdoors', icon: 'landscape', match: ['/v2/outdoors'] },
+    { href: '/v2/about', label: 'About', icon: 'person' }
   ];
+
+  // The contact page is the footer's full-size version, so don't show both.
+  const showFooter = $derived(page.url.pathname !== '/v2/contact');
 
   onMount(() => appearance.init());
 </script>
@@ -34,9 +38,10 @@
   <div class="rail-wrap">
     <NavRail items={NAV} pathname={page.url.pathname}>
       {#snippet fab()}
-        <Fab icon="mail" label="Contact" href="#contact" />
+        <Fab icon="mail" label="Contact" href="/v2/contact" />
       {/snippet}
       {#snippet footer()}
+        <IconButton icon="palette" label="Design system" href="/v2/system" selected={page.url.pathname === '/v2/system'} />
         <IconButton icon="terminal" label="Open the IDE edition (v1)" href="/v1" data-sveltekit-reload />
       {/snippet}
     </NavRail>
@@ -59,7 +64,7 @@
       {@render children()}
     </main>
 
-    <ContactFooter />
+    {#if showFooter}<ContactFooter />{/if}
   </div>
 </div>
 

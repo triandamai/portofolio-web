@@ -10,7 +10,7 @@
    */
   function retarget(html: string): string {
     return html.replace(/<a href="(\/[^"]*)"/g, (_, href: string) => {
-      if (/^\/(projects|blog)(\/|$)/.test(href)) return `<a href="/v2${href}"`;
+      if (/^\/(projects|blog|about|outdoors|contact)(\/|$)/.test(href)) return `<a href="/v2${href}"`;
       if (href.startsWith('/v2')) return `<a href="${href}"`;
       return `<a href="${href}" data-sveltekit-reload`;
     });
@@ -19,7 +19,30 @@
   /** "> line" pull quotes; v1's renderer leaves these as text, so handle them here. */
   const withQuotes = (md: string) => md.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
 
-  const html = $derived(retarget(renderMarkdown(withQuotes(content))));
+  /**
+   * Content files are hard-wrapped at ~90 chars and the shared renderer turns every
+   * line into its own <p>. Join soft-wrapped lines back into one paragraph first.
+   */
+  function unwrap(md: string): string {
+    const block = /^(#|-|\||!\[|>|```|---|\d+\.\s|<)/;
+    const out: string[] = [];
+    let fenced = false;
+    for (const line of md.split('\n')) {
+      // Leave code alone: raw fences, and pre-highlighted <pre> blocks spanning several lines.
+      if (line.startsWith('```')) fenced = !fenced;
+      if (line.includes('<pre')) fenced = !line.includes('</pre>');
+      else if (fenced && line.includes('</pre>')) { out.push(line); fenced = false; continue; }
+      const prev = out[out.length - 1];
+      if (!fenced && prev && line.trim() && !block.test(line) && !block.test(prev) && prev.trim()) {
+        out[out.length - 1] = `${prev} ${line.trim()}`;
+      } else {
+        out.push(line);
+      }
+    }
+    return out.join('\n');
+  }
+
+  const html = $derived(retarget(renderMarkdown(withQuotes(unwrap(content)))));
 </script>
 
 <div class="prose">

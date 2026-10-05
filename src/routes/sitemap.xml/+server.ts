@@ -12,6 +12,10 @@ export async function GET() {
     '/v2/projects',
     '/v2/blog',
     '/v2/system',
+    '/v2/about',
+    '/v2/outdoors',
+    '/v2/contact',
+    ...trails.map(trail => `/v2/outdoors/${trail.id}`),
     ...PROJECTS.map(project => `/v2/projects/${project.slug}`),
     ...POSTS.filter(post => post.published).map(post => `/v2/blog/${post.slug}`)
   ];

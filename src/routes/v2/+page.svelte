@@ -52,9 +52,9 @@
     <Shape name="clover4" size="48px" color="var(--tertiary-c)"><span class="tile-ico c2"><Icon name="bolt" /></span></Shape>
     <div><div class="k">learning</div><div class="v">Rust, slowly and stubbornly. Shipyard runs on Axum.</div></div>
   </div>
-  <a class="tile" href="/outdoors" data-sveltekit-reload>
+  <a class="tile" href="/v2/outdoors">
     <Shape name="flower" size="48px" color="var(--secondary-c)"><span class="tile-ico c3"><Icon name="landscape" /></span></Shape>
-    <div><div class="k">off-screen</div><div class="v">Hiking and trekking. The trail log lives in outdoors.log ↗</div></div>
+    <div><div class="k">off-screen</div><div class="v">Hiking mountains across Java. The trail log lives in outdoors.log</div></div>
   </a>
 </div>
 
@@ -130,7 +130,7 @@
     {#each data.posts as post (post.slug)}
       <ListItem headline={post.title} supporting="{post.date} · {post.tags.slice(0, 3).join(', ')}" icon="article" href="/v2/blog/{post.slug}" />
     {/each}
-    <ListItem headline="Snippets" supporting="axum-sse.rs, debounce.ts, binary-search.ts" icon="code" href="/snippets" />
+    <ListItem headline="Snippets" supporting="axum-sse.rs, debounce.ts, binary-search.ts" icon="code" href="/snippets" reload />
   </List>
 </section>
 

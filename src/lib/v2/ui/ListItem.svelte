@@ -2,8 +2,17 @@
   import type { Snippet } from 'svelte';
   import Icon from './Icon.svelte';
 
-  type Props = { headline: string; supporting?: string; icon?: string; href?: string; trailing?: Snippet; external?: boolean };
-  let { headline, supporting, icon, href, trailing, external = false }: Props = $props();
+  type Props = {
+    headline: string;
+    supporting?: string;
+    icon?: string;
+    href?: string;
+    trailing?: Snippet;
+    external?: boolean;
+    /** Full page load, needed when linking out of v2 into v1 routes. */
+    reload?: boolean;
+  };
+  let { headline, supporting, icon, href, trailing, external = false, reload = false }: Props = $props();
 </script>
 
 {#snippet body()}
@@ -14,7 +23,7 @@
 
 <li>
   {#if href}
-    <a class="li" {href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{@render body()}</a>
+    <a class="li" {href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} data-sveltekit-reload={reload ? '' : undefined}>{@render body()}</a>
   {:else}
     <div class="li">{@render body()}</div>
   {/if}

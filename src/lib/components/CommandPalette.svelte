@@ -9,7 +9,7 @@
   let selectedIdx = $state(0);
 
   const actions: PaletteAction[] = [
-    { id: 'nav-home',       label: 'welcome.md',        description: 'Go to welcome',     category: 'navigate', handler: () => nav('/'), keywords: ['home','start'] },
+    { id: 'nav-home',       label: 'welcome.md',        description: 'Go to welcome',     category: 'navigate', handler: () => nav('/v1'), keywords: ['home','start'] },
     { id: 'nav-about',      label: 'about.md',          description: 'About me',           category: 'navigate', handler: () => nav('/about') },
     { id: 'nav-experience', label: 'experience.json',   description: 'Work history',       category: 'navigate', handler: () => nav('/experience') },
     { id: 'nav-skills',     label: 'skills.ts',         description: 'Tech stack',         category: 'navigate', handler: () => nav('/skills') },

@@ -1,10 +1,6 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { redirect } from '@sveltejs/kit';
 
+// v2 is the default experience; the IDE edition lives on at /v1.
 export function load() {
-  const content = readFileSync(
-    join(process.cwd(), 'src/lib/content/welcome.md'),
-    'utf-8'
-  );
-  return { content };
+  redirect(307, '/v2');
 }

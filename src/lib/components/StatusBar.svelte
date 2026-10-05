@@ -3,7 +3,7 @@
 
   const lineCol = $derived(() => {
     const map: Record<string, string> = {
-      "/": "Ln 1, Col 1",
+      "/v1": "Ln 1, Col 1",
       "/about": "Ln 42, Col 1",
       "/experience": "Ln 1, Col 1",
       "/skills": "Ln 1, Col 1",
@@ -22,6 +22,7 @@
   </div>
 
   <div class="status-bar__right">
+    <a href="/v2" class="status-item" data-sveltekit-reload aria-label="Switch to the new design">✦ Try v2</a>
     <a
       href="/resume/Trian_Damai_Resume_Software_Engineer.pdf"
       target="_blank"

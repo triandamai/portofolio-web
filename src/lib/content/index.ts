@@ -85,7 +85,7 @@ export const SNIPPETS: SnippetMeta[] = [
 ];
 
 export const NAV_FILES = [
-  { path: "/", label: "welcome.md", icon: "home" },
+  { path: "/v1", label: "welcome.md", icon: "home" },
   { path: "/about", label: "about.md", icon: "person" },
   { path: "/experience", label: "experience.json", icon: "work" },
   { path: "/skills", label: "skills.ts", icon: "code" },

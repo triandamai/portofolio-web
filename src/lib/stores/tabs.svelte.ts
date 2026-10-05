@@ -4,11 +4,11 @@ export interface Tab {
   isDirty?: boolean;
 }
 
-const WELCOME_TAB: Tab = { path: '/', label: 'welcome.md' };
+const WELCOME_TAB: Tab = { path: '/v1', label: 'welcome.md' };
 
 function createTabsStore() {
   let tabs = $state<Tab[]>([WELCOME_TAB]);
-  let activeTab = $state<string>('/');
+  let activeTab = $state<string>('/v1');
 
   return {
     get tabs() { return tabs; },
@@ -45,7 +45,7 @@ function createTabsStore() {
 export const tabsStore = createTabsStore();
 
 export const FILE_LABELS: Record<string, string> = {
-  '/': 'welcome.md',
+  '/v1': 'welcome.md',
   '/about': 'about.md',
   '/experience': 'experience.json',
   '/skills': 'skills.ts',

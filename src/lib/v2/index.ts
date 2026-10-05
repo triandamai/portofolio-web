@@ -1,0 +1,25 @@
+// v2 design system — Material 3 Expressive components.
+export { default as Icon } from './ui/Icon.svelte';
+export { default as Button } from './ui/Button.svelte';
+export { default as IconButton } from './ui/IconButton.svelte';
+export { default as ButtonGroup } from './ui/ButtonGroup.svelte';
+export { default as SplitButton } from './ui/SplitButton.svelte';
+export { default as Fab } from './ui/Fab.svelte';
+export { default as Chip } from './ui/Chip.svelte';
+export { default as Card } from './ui/Card.svelte';
+export { default as Shape } from './ui/Shape.svelte';
+export { default as LoadingIndicator } from './ui/LoadingIndicator.svelte';
+export { default as WavyProgress } from './ui/WavyProgress.svelte';
+export { default as Switch } from './ui/Switch.svelte';
+export { default as List } from './ui/List.svelte';
+export { default as ListItem } from './ui/ListItem.svelte';
+export { default as Snackbar } from './ui/Snackbar.svelte';
+export { default as NavRail } from './ui/NavRail.svelte';
+export { default as NavBar } from './ui/NavBar.svelte';
+export { default as GradientPicker } from './ui/GradientPicker.svelte';
+export { default as ThemeToggle } from './ui/ThemeToggle.svelte';
+export { default as SectionHeader } from './ui/SectionHeader.svelte';
+export { default as Prose } from './ui/Prose.svelte';
+export type { NavItem } from './ui/nav';
+export { snackbar } from './stores/snackbar.svelte';
+export { appearance, SCHEMES, type SchemeId } from './stores/appearance.svelte';

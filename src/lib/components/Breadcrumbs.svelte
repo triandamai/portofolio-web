@@ -3,7 +3,7 @@
 
   const breadcrumbs = $derived(() => {
     const parts = page.url.pathname.split('/').filter(Boolean);
-    if (parts.length === 0) return [{ label: 'welcome.md', path: '/' as string | null }];
+    if (parts.length === 0 || page.url.pathname === '/v1') return [{ label: 'welcome.md', path: '/v1' as string | null }];
 
     const crumbs: { label: string; path: string | null }[] = [
       { label: 'src', path: null },

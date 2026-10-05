@@ -7,8 +7,18 @@ export const prerender = true;
 export async function GET() {
   const domain = 'https://trian.space';
 
+  const v2Pages = [
+    '/v2',
+    '/v2/projects',
+    '/v2/blog',
+    '/v2/system',
+    ...PROJECTS.map(project => `/v2/projects/${project.slug}`),
+    ...POSTS.filter(post => post.published).map(post => `/v2/blog/${post.slug}`)
+  ];
+
+  // v1 (IDE edition) pages stay indexed at lower priority
   const staticPages = [
-    '',
+    '/v1',
     '/about',
     '/experience',
     '/skills',
@@ -26,6 +36,7 @@ export async function GET() {
   const trailPages = trails.map(trail => `/outdoors/${trail.id}`);
 
   const allPages = [
+    ...v2Pages,
     ...staticPages,
     ...projectPages,
     ...snippetPages,
@@ -40,9 +51,11 @@ export async function GET() {
       path => {
         let priority = '0.6';
         let changefreq = 'weekly';
-        if (path === '') {
+        if (path === '/v2') {
           priority = '1.0';
           changefreq = 'daily';
+        } else if (path.startsWith('/v2')) {
+          priority = '0.9';
         } else if ([
           '/about',
           '/experience',

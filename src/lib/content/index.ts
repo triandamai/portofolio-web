@@ -47,6 +47,16 @@ export const PROJECTS: ProjectMeta[] = [
     featured: true
   },
   {
+    slug: "nomi",
+    title: "Nomi",
+    description: "Self-hosted AI agent orchestrator in Rust — one ongoing chat per user, with specialist agents for money, planning, coding, reminders and Google Workspace handing work in and out of the same thread.",
+    tech: ["Rust", "Axum", "SvelteKit", "PostgreSQL", "pgvector", "MQTT"],
+    repo: "https://github.com/triandamai/nomi-v2",
+    demo: "https://nomi.trian.space",
+    year: 2026,
+    featured: true
+  },
+  {
     slug: "portfolio-web",
     title: "Portfolio — IDE Edition",
     description: "This site. A SvelteKit portfolio styled like a VS Code–inspired editor.",
@@ -85,7 +95,7 @@ export const SNIPPETS: SnippetMeta[] = [
 ];
 
 export const NAV_FILES = [
-  { path: "/", label: "welcome.md", icon: "home" },
+  { path: "/v1", label: "welcome.md", icon: "home" },
   { path: "/about", label: "about.md", icon: "person" },
   { path: "/experience", label: "experience.json", icon: "work" },
   { path: "/skills", label: "skills.ts", icon: "code" },

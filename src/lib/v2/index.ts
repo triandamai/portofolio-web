@@ -20,6 +20,7 @@ export { default as GradientPicker } from './ui/GradientPicker.svelte';
 export { default as ThemeToggle } from './ui/ThemeToggle.svelte';
 export { default as SectionHeader } from './ui/SectionHeader.svelte';
 export { default as Prose } from './ui/Prose.svelte';
+export { default as TextField } from './ui/TextField.svelte';
 export type { NavItem } from './ui/nav';
 export { snackbar } from './stores/snackbar.svelte';
 export { appearance, SCHEMES, type SchemeId } from './stores/appearance.svelte';

@@ -161,7 +161,7 @@
 
   /* ── Show & auto-play when user first enters /outdoors ── */
   $effect(() => {
-    const isOutdoors = page.url.pathname.startsWith('/outdoors');
+    const isOutdoors = page.url.pathname.startsWith('/v1/outdoors');
     if (isOutdoors && view === 'hidden') {
       view = 'mini';
       if (TRACKS.length) loadAndPlay(TRACKS[0]);

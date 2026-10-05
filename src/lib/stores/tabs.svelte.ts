@@ -46,29 +46,29 @@ export const tabsStore = createTabsStore();
 
 export const FILE_LABELS: Record<string, string> = {
   '/v1': 'welcome.md',
-  '/about': 'about.md',
-  '/experience': 'experience.json',
-  '/skills': 'skills.ts',
-  '/projects': 'projects/',
-  '/snippets': 'snippets/',
-  '/blog': 'blog/',
-  '/outdoors': 'outdoors.log',
-  '/resume': 'resume.pdf',
-  '/contact': 'contact.md'
+  '/v1/about': 'about.md',
+  '/v1/experience': 'experience.json',
+  '/v1/skills': 'skills.ts',
+  '/v1/projects': 'projects/',
+  '/v1/snippets': 'snippets/',
+  '/v1/blog': 'blog/',
+  '/v1/outdoors': 'outdoors.log',
+  '/v1/resume': 'resume.pdf',
+  '/v1/contact': 'contact.md'
 };
 
 export function labelForPath(path: string): string {
   if (FILE_LABELS[path]) return FILE_LABELS[path];
-  if (path.startsWith('/projects/')) {
-    const slug = path.replace('/projects/', '');
+  if (path.startsWith('/v1/projects/')) {
+    const slug = path.replace('/v1/projects/', '');
     return `${slug}.md`;
   }
-  if (path.startsWith('/snippets/')) {
-    const slug = path.replace('/snippets/', '');
+  if (path.startsWith('/v1/snippets/')) {
+    const slug = path.replace('/v1/snippets/', '');
     return `${slug}.ts`;
   }
-  if (path.startsWith('/outdoors/')) {
-    const id = path.replace('/outdoors/', '');
+  if (path.startsWith('/v1/outdoors/')) {
+    const id = path.replace('/v1/outdoors/', '');
     return `${id}.log`;
   }
   return path;

@@ -3,23 +3,48 @@
 
   let { content }: { content: string } = $props();
 
+  /** Pages that only exist in the IDE edition, which now lives under /v1. */
+  const V1_ONLY = /^\/(experience|skills|snippets|resume)\/?$|^\/snippets\//;
+
   /**
-   * Content links were written for v1 paths. Point the ones v2 has pages
-   * for at /v2, and force a full reload for the rest so v1's stylesheet
-   * loads cleanly instead of mixing with v2's.
+   * Content links use root paths, which are v2 pages. Send the few v1-only pages
+   * to /v1, with a full reload so v1's stylesheet doesn't mix with v2's.
    */
   function retarget(html: string): string {
-    return html.replace(/<a href="(\/[^"]*)"/g, (_, href: string) => {
-      if (/^\/(projects|blog)(\/|$)/.test(href)) return `<a href="/v2${href}"`;
-      if (href.startsWith('/v2')) return `<a href="${href}"`;
-      return `<a href="${href}" data-sveltekit-reload`;
+    return html.replace(/<a href="(\/[^"]*)"/g, (match, href: string) => {
+      if (V1_ONLY.test(href)) return `<a href="/v1${href}" data-sveltekit-reload`;
+      if (href === '/v1' || href.startsWith('/v1/')) return `${match} data-sveltekit-reload`;
+      return match;
     });
   }
 
   /** "> line" pull quotes; v1's renderer leaves these as text, so handle them here. */
   const withQuotes = (md: string) => md.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
 
-  const html = $derived(retarget(renderMarkdown(withQuotes(content))));
+  /**
+   * Content files are hard-wrapped at ~90 chars and the shared renderer turns every
+   * line into its own <p>. Join soft-wrapped lines back into one paragraph first.
+   */
+  function unwrap(md: string): string {
+    const block = /^(#|-|\||!\[|>|```|---|\d+\.\s|<)/;
+    const out: string[] = [];
+    let fenced = false;
+    for (const line of md.split('\n')) {
+      // Leave code alone: raw fences, and pre-highlighted <pre> blocks spanning several lines.
+      if (line.startsWith('```')) fenced = !fenced;
+      if (line.includes('<pre')) fenced = !line.includes('</pre>');
+      else if (fenced && line.includes('</pre>')) { out.push(line); fenced = false; continue; }
+      const prev = out[out.length - 1];
+      if (!fenced && prev && line.trim() && !block.test(line) && !block.test(prev) && prev.trim()) {
+        out[out.length - 1] = `${prev} ${line.trim()}`;
+      } else {
+        out.push(line);
+      }
+    }
+    return out.join('\n');
+  }
+
+  const html = $derived(retarget(renderMarkdown(withQuotes(unwrap(content)))));
 </script>
 
 <div class="prose">

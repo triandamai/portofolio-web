@@ -10,21 +10,21 @@
 
   const actions: PaletteAction[] = [
     { id: 'nav-home',       label: 'welcome.md',        description: 'Go to welcome',     category: 'navigate', handler: () => nav('/v1'), keywords: ['home','start'] },
-    { id: 'nav-about',      label: 'about.md',          description: 'About me',           category: 'navigate', handler: () => nav('/about') },
-    { id: 'nav-experience', label: 'experience.json',   description: 'Work history',       category: 'navigate', handler: () => nav('/experience') },
-    { id: 'nav-skills',     label: 'skills.ts',         description: 'Tech stack',         category: 'navigate', handler: () => nav('/skills') },
-    { id: 'nav-projects',   label: 'projects/',         description: 'All projects',       category: 'navigate', handler: () => nav('/projects') },
-    { id: 'nav-snippets',   label: 'snippets/',         description: 'Code snippets',      category: 'navigate', handler: () => nav('/snippets') },
-    { id: 'nav-blog',       label: 'blog/',             description: 'Writing & posts',    category: 'navigate', handler: () => nav('/blog'), keywords: ['writing','posts','articles','blog'] },
-    { id: 'nav-outdoors',   label: 'outdoors.log',      description: 'Hiking & trekking trails', category: 'navigate', handler: () => nav('/outdoors'), keywords: ['hiking','trekking','trails','outdoor','kalimantan'] },
-    { id: 'nav-resume',     label: 'resume.pdf',        description: 'Download my resume', category: 'navigate', handler: () => nav('/resume'), keywords: ['resume','cv','download','pdf'] },
-    { id: 'nav-contact',    label: 'contact.md',        description: 'Get in touch',       category: 'navigate', handler: () => nav('/contact') },
+    { id: 'nav-about',      label: 'about.md',          description: 'About me',           category: 'navigate', handler: () => nav('/v1/about') },
+    { id: 'nav-experience', label: 'experience.json',   description: 'Work history',       category: 'navigate', handler: () => nav('/v1/experience') },
+    { id: 'nav-skills',     label: 'skills.ts',         description: 'Tech stack',         category: 'navigate', handler: () => nav('/v1/skills') },
+    { id: 'nav-projects',   label: 'projects/',         description: 'All projects',       category: 'navigate', handler: () => nav('/v1/projects') },
+    { id: 'nav-snippets',   label: 'snippets/',         description: 'Code snippets',      category: 'navigate', handler: () => nav('/v1/snippets') },
+    { id: 'nav-blog',       label: 'blog/',             description: 'Writing & posts',    category: 'navigate', handler: () => nav('/v1/blog'), keywords: ['writing','posts','articles','blog'] },
+    { id: 'nav-outdoors',   label: 'outdoors.log',      description: 'Hiking & trekking trails', category: 'navigate', handler: () => nav('/v1/outdoors'), keywords: ['hiking','trekking','trails','outdoor','kalimantan'] },
+    { id: 'nav-resume',     label: 'resume.pdf',        description: 'Download my resume', category: 'navigate', handler: () => nav('/v1/resume'), keywords: ['resume','cv','download','pdf'] },
+    { id: 'nav-contact',    label: 'contact.md',        description: 'Get in touch',       category: 'navigate', handler: () => nav('/v1/contact') },
     ...PROJECTS.map(p => ({
       id: `project-${p.slug}`,
       label: `${p.slug}.md`,
       description: p.description,
       category: 'navigate' as const,
-      handler: () => nav(`/projects/${p.slug}`),
+      handler: () => nav(`/v1/projects/${p.slug}`),
       keywords: p.tech
     })),
     ...SNIPPETS.map(s => ({
@@ -32,7 +32,7 @@
       label: s.filename,
       description: 'Code snippet',
       category: 'navigate' as const,
-      handler: () => nav(`/snippets/${s.slug}`)
+      handler: () => nav(`/v1/snippets/${s.slug}`)
     })),
     {
       id: 'copy-email', label: 'Copy Email Address', description: 'triandamai@gmail.com',

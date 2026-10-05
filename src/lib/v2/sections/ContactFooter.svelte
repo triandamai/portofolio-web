@@ -25,7 +25,9 @@
     <Button variant="outlined" size="md" href={GITHUB} target="_blank" rel="noopener noreferrer" class="on-inverse">GitHub</Button>
     <Button variant="outlined" size="md" href={LINKEDIN} target="_blank" rel="noopener noreferrer" class="on-inverse">LinkedIn</Button>
   </div>
-  <p class="legacy">Prefer the old editor look? <a href="/v1" data-sveltekit-reload>Open the IDE edition (v1)</a></p>
+  <p class="legacy">
+    <a href="/contact">Send a message</a> · <a href="/system">Design system</a> · Prefer the old editor look? <a href="/v1" data-sveltekit-reload>Open the IDE edition (v1)</a>
+  </p>
 </footer>
 
 <style>

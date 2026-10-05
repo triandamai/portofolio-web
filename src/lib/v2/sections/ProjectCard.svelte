@@ -12,7 +12,7 @@
   const host = $derived(projectHost(project));
 </script>
 
-<Card href="/v2/projects/{project.slug}" {variant} {radius} class="project {cls}">
+<Card href="/projects/{project.slug}" {variant} {radius} class="project {cls}">
   <div class="shot" class:tall class:big>
     {#if cover}
       <img src={cover} alt="{project.title} screenshot" loading="lazy" />

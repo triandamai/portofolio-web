@@ -96,13 +96,13 @@ export const SNIPPETS: SnippetMeta[] = [
 
 export const NAV_FILES = [
   { path: "/v1", label: "welcome.md", icon: "home" },
-  { path: "/about", label: "about.md", icon: "person" },
-  { path: "/experience", label: "experience.json", icon: "work" },
-  { path: "/skills", label: "skills.ts", icon: "code" },
-  { path: "/projects", label: "projects/", icon: "folder" },
-  { path: "/snippets", label: "snippets/", icon: "snippet" },
-  { path: "/blog", label: "blog/", icon: "folder" },
-  { path: "/outdoors", label: "outdoors.log", icon: "outdoor" },
-  { path: "/resume", label: "resume.pdf", icon: "pdf" },
-  { path: "/contact", label: "contact.md", icon: "mail" }
+  { path: "/v1/about", label: "about.md", icon: "person" },
+  { path: "/v1/experience", label: "experience.json", icon: "work" },
+  { path: "/v1/skills", label: "skills.ts", icon: "code" },
+  { path: "/v1/projects", label: "projects/", icon: "folder" },
+  { path: "/v1/snippets", label: "snippets/", icon: "snippet" },
+  { path: "/v1/blog", label: "blog/", icon: "folder" },
+  { path: "/v1/outdoors", label: "outdoors.log", icon: "outdoor" },
+  { path: "/v1/resume", label: "resume.pdf", icon: "pdf" },
+  { path: "/v1/contact", label: "contact.md", icon: "mail" }
 ];

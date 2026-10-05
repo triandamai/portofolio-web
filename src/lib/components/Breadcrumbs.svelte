@@ -2,15 +2,16 @@
   import { page } from '$app/state';
 
   const breadcrumbs = $derived(() => {
-    const parts = page.url.pathname.split('/').filter(Boolean);
-    if (parts.length === 0 || page.url.pathname === '/v1') return [{ label: 'welcome.md', path: '/v1' as string | null }];
+    // The IDE edition lives under /v1; crumbs show the file path without that prefix.
+    const parts = page.url.pathname.replace(/^\/v1(?=\/|$)/, '').split('/').filter(Boolean);
+    if (parts.length === 0) return [{ label: 'welcome.md', path: '/v1' as string | null }];
 
     const crumbs: { label: string; path: string | null }[] = [
       { label: 'src', path: null },
       { label: 'portfolio', path: null }
     ];
     for (let i = 0; i < parts.length; i++) {
-      const path = '/' + parts.slice(0, i + 1).join('/');
+      const path = '/v1/' + parts.slice(0, i + 1).join('/');
       const label = i === parts.length - 1
         ? labelForSegment(parts[i], parts[i - 1])
         : parts[i];

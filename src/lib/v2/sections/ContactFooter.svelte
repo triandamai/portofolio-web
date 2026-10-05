@@ -31,7 +31,8 @@
 <style>
   .foot {
     display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 32px; align-items: end;
-    background: var(--inverse-surface); color: var(--inverse-on-surface);
+    /* Always dark so the pastel brand gradient on the headline keeps its contrast in both themes */
+    background: var(--hero-ink); color: var(--hero-paper);
     border-radius: var(--r-xxl) var(--r-xxl) var(--r-md) var(--r-xxl);
     padding: clamp(24px, 4vw, 48px); scroll-margin-top: 24px;
   }
@@ -44,8 +45,8 @@
   .mail:hover { text-decoration: underline; text-underline-offset: 4px; }
   .note { margin-top: 8px; opacity: .75; font-size: 15px; max-width: 44ch; }
   .links { display: flex; gap: 8px; flex-wrap: wrap; }
-  .links :global(.on-inverse) { color: var(--inverse-on-surface); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--inverse-on-surface) 40%, transparent); }
-  .legacy { grid-column: 1 / -1; font-size: 13px; opacity: .7; border-top: 1px solid color-mix(in srgb, var(--inverse-on-surface) 18%, transparent); padding-top: 16px; }
+  .links :global(.on-inverse) { color: var(--hero-paper); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--hero-paper) 40%, transparent); }
+  .legacy { grid-column: 1 / -1; font-size: 13px; opacity: .7; border-top: 1px solid color-mix(in srgb, var(--hero-paper) 18%, transparent); padding-top: 16px; }
   .legacy a { color: inherit; }
   @media (max-width: 840px) { .foot { grid-template-columns: minmax(0, 1fr); border-radius: var(--r-xl); } }
 </style>

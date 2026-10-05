@@ -49,10 +49,10 @@ export const PROJECTS: ProjectMeta[] = [
   {
     slug: "nomi",
     title: "Nomi",
-    description: "An AI agent orchestrator.",
-    tech: [],
-    repo: "",
-    demo: "",
+    description: "Self-hosted AI agent orchestrator in Rust — one ongoing chat per user, with specialist agents for money, planning, coding, reminders and Google Workspace handing work in and out of the same thread.",
+    tech: ["Rust", "Axum", "SvelteKit", "PostgreSQL", "pgvector", "MQTT"],
+    repo: "https://github.com/triandamai/nomi-v2",
+    demo: "https://nomi.trian.space",
     year: 2026,
     featured: true
   },

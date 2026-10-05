@@ -6,85 +6,36 @@ export const prerender = true;
 
 export async function GET() {
   const domain = 'https://trian.space';
+  const published = POSTS.filter(post => post.published);
 
-  const v2Pages = [
-    '/v2',
-    '/v2/projects',
-    '/v2/blog',
-    '/v2/system',
-    '/v2/about',
-    '/v2/outdoors',
-    '/v2/contact',
-    ...trails.map(trail => `/v2/outdoors/${trail.id}`),
-    ...PROJECTS.map(project => `/v2/projects/${project.slug}`),
-    ...POSTS.filter(post => post.published).map(post => `/v2/blog/${post.slug}`)
+  // Main site (new design)
+  const main: [string, string, string][] = [
+    ['/', '1.0', 'daily'],
+    ...['/projects', '/blog', '/about', '/outdoors', '/contact', '/system'].map(p => [p, '0.9', 'weekly'] as [string, string, string]),
+    ...PROJECTS.map(p => [`/projects/${p.slug}`, '0.8', 'weekly'] as [string, string, string]),
+    ...published.map(p => [`/blog/${p.slug}`, '0.8', 'weekly'] as [string, string, string]),
+    ...trails.map(t => [`/outdoors/${t.id}`, '0.7', 'monthly'] as [string, string, string])
   ];
 
-  // v1 (IDE edition) pages stay indexed at lower priority
-  const staticPages = [
-    '/v1',
-    '/about',
-    '/experience',
-    '/skills',
-    '/projects',
-    '/snippets',
-    '/blog',
-    '/outdoors',
-    '/resume',
-    '/contact'
-  ];
-
-  const projectPages = PROJECTS.map(project => `/projects/${project.slug}`);
-  const snippetPages = SNIPPETS.map(snippet => `/snippets/${snippet.slug}`);
-  const blogPages = POSTS.filter(post => post.published).map(post => `/blog/${post.slug}`);
-  const trailPages = trails.map(trail => `/outdoors/${trail.id}`);
-
-  const allPages = [
-    ...v2Pages,
-    ...staticPages,
-    ...projectPages,
-    ...snippetPages,
-    ...blogPages,
-    ...trailPages
-  ];
+  // IDE edition, kept at /v1 at lower priority
+  const v1: [string, string, string][] = [
+    '/v1', '/v1/about', '/v1/experience', '/v1/skills', '/v1/projects', '/v1/snippets',
+    '/v1/blog', '/v1/outdoors', '/v1/resume', '/v1/contact',
+    ...SNIPPETS.map(s => `/v1/snippets/${s.slug}`)
+  ].map(p => [p, '0.4', 'monthly']);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${allPages
-    .map(
-      path => {
-        let priority = '0.6';
-        let changefreq = 'weekly';
-        if (path === '/v2') {
-          priority = '1.0';
-          changefreq = 'daily';
-        } else if (path.startsWith('/v2')) {
-          priority = '0.9';
-        } else if ([
-          '/about',
-          '/experience',
-          '/skills',
-          '/projects',
-          '/snippets',
-          '/blog',
-          '/outdoors',
-          '/resume',
-          '/contact'
-        ].includes(path)) {
-          priority = '0.8';
-          changefreq = 'weekly';
-        }
-        return `  <url>
+${[...main, ...v1]
+  .map(([path, priority, changefreq]) => `  <url>
     <loc>${domain}${path}</loc>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-  </url>`;
-      }
-    )
-    .join('\n')}
+  </url>`)
+  .join('\n')}
 </urlset>`;
 
-  return new Response(sitemap.trim(), {
+  return new Response(sitemap, {
     headers: {
       'Content-Type': 'application/xml',
       'Cache-Control': 'max-age=0, s-maxage=3600'

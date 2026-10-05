@@ -3,16 +3,18 @@
 
   let { content }: { content: string } = $props();
 
+  /** Pages that only exist in the IDE edition, which now lives under /v1. */
+  const V1_ONLY = /^\/(experience|skills|snippets|resume)\/?$|^\/snippets\//;
+
   /**
-   * Content links were written for v1 paths. Point the ones v2 has pages
-   * for at /v2, and force a full reload for the rest so v1's stylesheet
-   * loads cleanly instead of mixing with v2's.
+   * Content links use root paths, which are v2 pages. Send the few v1-only pages
+   * to /v1, with a full reload so v1's stylesheet doesn't mix with v2's.
    */
   function retarget(html: string): string {
-    return html.replace(/<a href="(\/[^"]*)"/g, (_, href: string) => {
-      if (/^\/(projects|blog|about|outdoors|contact)(\/|$)/.test(href)) return `<a href="/v2${href}"`;
-      if (href.startsWith('/v2')) return `<a href="${href}"`;
-      return `<a href="${href}" data-sveltekit-reload`;
+    return html.replace(/<a href="(\/[^"]*)"/g, (match, href: string) => {
+      if (V1_ONLY.test(href)) return `<a href="/v1${href}" data-sveltekit-reload`;
+      if (href === '/v1' || href.startsWith('/v1/')) return `${match} data-sveltekit-reload`;
+      return match;
     });
   }
 

@@ -2,7 +2,18 @@
   import { renderMarkdown } from '$lib/utils/markdown';
   let { content }: { content: string } = $props();
 
-  const html = $derived(renderMarkdown(content));
+  /**
+   * Content links use root paths, which now belong to the new design. Keep readers
+   * inside the IDE edition by prefixing page links with /v1 (files like PDFs stay put).
+   */
+  function toV1(html: string): string {
+    return html.replace(/<a href="(\/[^"]*)"/g, (match, href: string) => {
+      if (href.startsWith('/v1') || /\.[a-z0-9]+$/i.test(href)) return match;
+      return `<a href="${href === '/' ? '/v1' : `/v1${href}`}"`;
+    });
+  }
+
+  const html = $derived(toV1(renderMarkdown(content)));
 </script>
 
 <div class="prose" role="document">

@@ -34,7 +34,7 @@
     {/each}
     <text x={LEFT - 10} y={TOP - 14} text-anchor="end" class="axis">m</text>
     {#each shapes as s (s.id)}
-      <a href="/v2/outdoors/{s.id}" class="peak">
+      <a href="/outdoors/{s.id}" class="peak">
         <path d={s.d} fill="url(#peak-fill)" stroke="var(--hero-ink)" stroke-opacity=".18" />
         <circle cx={s.cx} cy={s.top - 1} r="4" fill="var(--on-surface)" />
         <text x={s.cx} y={s.top - 12} text-anchor="middle" class="val">{s.meters.toLocaleString('en-US')}</text>

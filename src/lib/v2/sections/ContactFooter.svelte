@@ -26,7 +26,7 @@
     <Button variant="outlined" size="md" href={LINKEDIN} target="_blank" rel="noopener noreferrer" class="on-inverse">LinkedIn</Button>
   </div>
   <p class="legacy">
-    <a href="/v2/contact">Send a message</a> · <a href="/v2/system">Design system</a> · Prefer the old editor look? <a href="/v1" data-sveltekit-reload>Open the IDE edition (v1)</a>
+    <a href="/contact">Send a message</a> · <a href="/system">Design system</a> · Prefer the old editor look? <a href="/v1" data-sveltekit-reload>Open the IDE edition (v1)</a>
   </p>
 </footer>
 

@@ -92,10 +92,10 @@
       {#each PROJECTS as project}
         <li>
           <button
-            class:active={isActive(`/projects/${project.slug}`)}
-            onclick={() => navigate(`/projects/${project.slug}`)}
+            class:active={isActive(`/v1/projects/${project.slug}`)}
+            onclick={() => navigate(`/v1/projects/${project.slug}`)}
           >
-            <span class="file-icon" class:icon-active={isActive(`/projects/${project.slug}`)} aria-hidden="true">◆</span>
+            <span class="file-icon" class:icon-active={isActive(`/v1/projects/${project.slug}`)} aria-hidden="true">◆</span>
             {project.slug}.md
           </button>
         </li>
@@ -108,10 +108,10 @@
       {#each SNIPPETS as snippet}
         <li>
           <button
-            class:active={isActive(`/snippets/${snippet.slug}`)}
-            onclick={() => navigate(`/snippets/${snippet.slug}`)}
+            class:active={isActive(`/v1/snippets/${snippet.slug}`)}
+            onclick={() => navigate(`/v1/snippets/${snippet.slug}`)}
           >
-            <span class="file-icon" class:icon-active={isActive(`/snippets/${snippet.slug}`)} aria-hidden="true">◈</span>
+            <span class="file-icon" class:icon-active={isActive(`/v1/snippets/${snippet.slug}`)} aria-hidden="true">◈</span>
             {snippet.filename}
           </button>
         </li>

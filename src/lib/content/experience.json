@@ -1,8 +1,15 @@
 [
   {
+    "company": "Bank Mandiri",
+    "role": "Android Developer",
+    "period": "August 2026 – Present",
+    "location": "Jakarta, Indonesia",
+    "highlights": []
+  },
+  {
     "company": "Maybank Indonesia",
     "role": "Android Developer",
-    "period": "June 2025 – Present",
+    "period": "June 2025 – July 2026",
     "location": "Jakarta, Indonesia",
     "highlights": [
       "Developing and maintaining Android features for one of Indonesia's largest banking apps",

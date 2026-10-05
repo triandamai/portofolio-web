@@ -9,7 +9,8 @@ export function load() {
     featured: {
       big: bySlug('cekmotor'),
       tall: bySlug('uniflor'),
-      inverse: bySlug('shipyard')
+      inverse: bySlug('shipyard'),
+      highlight: bySlug('nomi')
     },
     projectCount: PROJECTS.length,
     experience,

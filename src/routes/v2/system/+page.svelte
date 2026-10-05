@@ -92,7 +92,7 @@
       <h2>TYPE · one variable family, width does the talking</h2>
       <div class="type-row"><code>display · wdth 30 · 900</code><div class="t-dl">Trian Damai</div></div>
       <div class="type-row"><code>headline · wdth 60 · 800</code><div class="t-hl">Things I built and finished</div></div>
-      <div class="type-row"><code>title · wdth 100 · 650</code><div class="t-tl">Android Developer, Maybank Indonesia</div></div>
+      <div class="type-row"><code>title · wdth 100 · 650</code><div class="t-tl">Android Developer, Bank Mandiri</div></div>
       <div class="type-row"><code>body · 16 / 1.55</code><div>Growing up in East Borneo, I had to figure most things out on my own. Slow internet, no local dev community, just forums and stubbornness.</div></div>
       <div class="type-row"><code>label · mono 13</code><div class="t-lb">experience.json · 2020 → now</div></div>
     </div>

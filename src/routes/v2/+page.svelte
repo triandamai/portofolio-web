@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Card, Chip, Icon, List, ListItem, SectionHeader, Shape, SplitButton } from '$lib/v2';
+  import { Button, Chip, Icon, List, ListItem, SectionHeader, Shape, SplitButton } from '$lib/v2';
   import HeroArt from '$lib/v2/sections/HeroArt.svelte';
   import ProjectCard from '$lib/v2/sections/ProjectCard.svelte';
   import { RESUMES } from '$lib/v2/content';
@@ -31,7 +31,7 @@
 <!-- Hero -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="copy">
-    <span class="eyebrow"><span class="dot"></span>Android Developer at Maybank Indonesia</span>
+    <span class="eyebrow"><span class="dot"></span>Android Developer at Bank Mandiri</span>
     <h1 id="hero-title"><span>Trian</span><span class="wide">Damai</span></h1>
     <p class="lede">Software engineer from a small village in East Kalimantan, now in Jakarta. I build Android apps for banks and government, and ship my own products on the side.</p>
     <div class="actions">
@@ -65,13 +65,10 @@
     <ProjectCard project={data.featured.big} big class="c-big" />
     <ProjectCard project={data.featured.tall} tall maxTech={2} class="c-tall" />
     <ProjectCard project={data.featured.inverse} variant="inverse" maxTech={3} class="c-half" />
-    <Card href="/v2/projects" variant="tertiary" radius="var(--r-xxl) var(--r-sm) var(--r-xxl) var(--r-xxl)" class="c-quote">
-      <blockquote>“Logging an expense should take under five seconds.”</blockquote>
-      <div class="src">
-        <span>Arta, Tudu and {data.projectCount - 3} more</span>
-        <span class="all">All projects <Icon name="arrow_forward" size={20} /></span>
-      </div>
-    </Card>
+    <ProjectCard project={data.featured.highlight} radius="var(--r-xxl) var(--r-sm) var(--r-xxl) var(--r-xxl)" class="c-half" />
+  </div>
+  <div class="see-all">
+    <Button variant="tonal" size="md" trailingIcon="arrow_forward" href="/v2/projects">See all {data.projectCount} projects</Button>
   </div>
 </section>
 
@@ -86,7 +83,7 @@
         <div class="what">
           <div class="role">{job.role}</div>
           <div class="co">{job.company}</div>
-          <p class="hl">{job.highlights[0]}</p>
+          {#if job.highlights[0]}<p class="hl">{job.highlights[0]}</p>{/if}
         </div>
         {#if isCurrent(job.period)}<span class="pill-now">Now</span>{:else}<span class="loc">{job.location.split(',')[0]}</span>{/if}
       </li>
@@ -180,10 +177,7 @@
   .bento :global(.c-big) { grid-column: span 4; grid-row: span 2; }
   .bento :global(.c-tall) { grid-column: span 2; grid-row: span 2; }
   .bento :global(.c-half) { grid-column: span 3; }
-  .bento :global(.c-quote) { grid-column: span 3; padding: 28px; justify-content: space-between; gap: 24px; }
-  blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; font-variation-settings: 'wdth' 85, 'wght' 560, 'opsz' 36; letter-spacing: -.01em; }
-  .src { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font: 600 13px/1.3 var(--font-mono); }
-  .all { display: inline-flex; align-items: center; gap: 6px; font: 650 15px/1 var(--font-body); }
+  .see-all { display: flex; justify-content: flex-end; }
 
   /* Timeline */
   .timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
@@ -227,7 +221,7 @@
 
   @media (max-width: 1100px) {
     .bento :global(.c-big) { grid-column: span 6; }
-    .bento :global(.c-tall), .bento :global(.c-half), .bento :global(.c-quote) { grid-column: span 3; }
+    .bento :global(.c-tall), .bento :global(.c-half) { grid-column: span 3; }
   }
   @media (max-width: 840px) {
     .hero { grid-template-columns: minmax(0, 1fr); border-radius: var(--r-xl) var(--r-xl) var(--r-xl) var(--r-sm); }

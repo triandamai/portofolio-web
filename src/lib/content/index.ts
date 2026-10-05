@@ -47,6 +47,16 @@ export const PROJECTS: ProjectMeta[] = [
     featured: true
   },
   {
+    slug: "nomi",
+    title: "Nomi",
+    description: "An AI agent orchestrator.",
+    tech: [],
+    repo: "",
+    demo: "",
+    year: 2026,
+    featured: true
+  },
+  {
     slug: "portfolio-web",
     title: "Portfolio — IDE Edition",
     description: "This site. A SvelteKit portfolio styled like a VS Code–inspired editor.",
